@@ -39,7 +39,7 @@ sudo apt install -y nodejs
 ```bash
 sudo mkdir -p /var/www/balisantih
 sudo chown -R $USER:www-data /var/www/balisantih
-git clone https://github.com/USERNAME/balisantih.git /var/www/balisantih
+git clone https://github.com/komangindra86/landing-balisantih.git /var/www/balisantih
 cd /var/www/balisantih
 
 composer install --no-dev --optimize-autoloader
@@ -55,8 +55,6 @@ php artisan view:cache
 sudo chown -R www-data:www-data storage bootstrap/cache
 sudo chmod -R ug+rw storage bootstrap/cache
 ```
-
-Ganti `USERNAME` dengan username GitHub pemilik repo.
 
 ## Konfigurasi Nginx
 
