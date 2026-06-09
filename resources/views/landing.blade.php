@@ -52,6 +52,36 @@
             ['title' => 'Bagikan Link', 'text' => 'Warga membuka portal banjar, atau tamu membuka link undangan digital yang dibagikan.'],
             ['title' => 'Bayar dan Catat', 'text' => 'Pembayaran tercatat di aplikasi sehingga pengurus atau pemilik acara dapat memantau transaksi.'],
         ];
+
+        $priceItems = [
+            [
+                'name' => 'Akses Portal Banjar',
+                'price' => 'Rp0 / Gratis',
+                'description' => 'Akses aplikasi portal banjar untuk pengurus dan warga tidak dikenakan biaya.',
+            ],
+            [
+                'name' => 'Akses Undangan Bali',
+                'price' => 'Rp0 / Gratis',
+                'description' => 'Pengguna dapat membuat undangan digital Bali tanpa biaya akses aplikasi.',
+            ],
+            [
+                'name' => 'Iuran Warga, Sesari, Urunan, Dedosan, dan Dana Banjar',
+                'price' => 'Rp10.000 - Rp5.000.000',
+                'description' => 'Nominal pembayaran ditentukan oleh pengurus banjar sesuai keputusan atau kebutuhan kegiatan.',
+            ],
+            [
+                'name' => 'Wedding Gift / Amplop Digital',
+                'price' => 'Rp10.000 - Rp5.000.000',
+                'description' => 'Nominal gift dipilih secara sukarela oleh tamu undangan dan dibayar melalui QRIS.',
+            ],
+        ];
+
+        $invitationTemplates = [
+            ['name' => 'Bali Classic', 'url' => 'https://undangan.balisantih.com/preview/templates/bali-classic'],
+            ['name' => 'Pura Sunset', 'url' => 'https://undangan.balisantih.com/preview/templates/pura-sunset'],
+            ['name' => 'Ubud Garden', 'url' => 'https://undangan.balisantih.com/preview/templates/ubud-garden'],
+            ['name' => 'Royal Kamasan', 'url' => 'https://undangan.balisantih.com/preview/templates/royal-kamasan'],
+        ];
     @endphp
 
     <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#17130f]/88 text-white shadow-sm backdrop-blur-xl">
@@ -73,6 +103,7 @@
                 <a class="transition hover:text-[#f5d681]" href="#layanan">Aplikasi Gratis</a>
                 <a class="transition hover:text-[#f5d681]" href="#banjar">Banjar Digital</a>
                 <a class="transition hover:text-[#f5d681]" href="#undangan">Undangan Bali</a>
+                <a class="transition hover:text-[#f5d681]" href="#harga">Harga</a>
                 <a class="transition hover:text-[#f5d681]" href="#alur">Alur</a>
                 <a class="transition hover:text-[#f5d681]" href="#kontak">Kontak</a>
             </div>
@@ -87,6 +118,7 @@
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#layanan">Aplikasi Gratis</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#banjar">Banjar Digital</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#undangan">Undangan Bali</a>
+                <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#harga">Harga</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#alur">Alur</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#kontak">Kontak</a>
             </div>
@@ -190,6 +222,42 @@
             </div>
         </section>
 
+        <section id="harga" class="bg-white py-20 sm:py-24">
+            <div class="mx-auto max-w-7xl px-5 lg:px-8">
+                <div class="max-w-3xl reveal">
+                    <p class="text-sm font-semibold uppercase text-[#8a6a2e]">Produk/Jasa dan Harga</p>
+                    <h2 class="mt-4 text-3xl font-semibold text-[#1f1b16] sm:text-4xl">Daftar produk, jasa, dan nominal transaksi dalam IDR</h2>
+                    <p class="mt-5 text-lg leading-8 text-[#5f574d]">
+                        Akses aplikasi Bali Santih gratis. Nominal dalam Rupiah/IDR berikut adalah range transaksi QRIS yang terjadi di dalam aplikasi.
+                    </p>
+                </div>
+
+                <div class="mt-12 overflow-hidden rounded-[8px] border border-[#e1d3b8] bg-[#fbfaf6] reveal">
+                    <div class="grid bg-[#29452f] px-5 py-4 text-sm font-semibold uppercase text-white sm:grid-cols-[1fr_220px_1.35fr]">
+                        <div>Produk/Jasa</div>
+                        <div class="hidden sm:block">Harga / Range IDR</div>
+                        <div class="hidden sm:block">Keterangan</div>
+                    </div>
+                    @foreach ($priceItems as $item)
+                        <div class="grid gap-3 border-t border-[#e1d3b8] px-5 py-5 sm:grid-cols-[1fr_220px_1.35fr] sm:items-start">
+                            <div>
+                                <p class="font-semibold text-[#1f1b16]">{{ $item['name'] }}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold uppercase text-[#8a6a2e] sm:hidden">Harga / Range IDR</p>
+                                <p class="mt-1 text-lg font-semibold text-[#29452f] sm:mt-0">{{ $item['price'] }}</p>
+                            </div>
+                            <p class="leading-7 text-[#5f574d]">{{ $item['description'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
+
+                <p class="mt-6 text-sm leading-7 text-[#6f6558] reveal">
+                    Pembayaran QRIS diproses untuk iuran/dana banjar dan Wedding Gift. Setiap transaksi menampilkan nominal dalam Rupiah sebelum pengguna melakukan pembayaran.
+                </p>
+            </div>
+        </section>
+
         <section id="banjar" class="bg-[#17130f] py-20 text-white sm:py-24">
             <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:px-8">
                 <div class="reveal">
@@ -222,8 +290,13 @@
                     <div class="reveal rounded-[8px] border border-[#e1d3b8] bg-white p-6 shadow-sm">
                         <h3 class="text-xl font-semibold text-[#1f1b16]">Template tersedia</h3>
                         <div class="mt-5 grid gap-3 sm:grid-cols-2">
-                            @foreach (['Bali Classic', 'Pura Sunset', 'Ubud Garden', 'Royal Kamasan'] as $template)
-                                <div class="rounded-[8px] border border-[#eadfca] bg-[#fbfaf6] px-4 py-3 text-sm font-medium text-[#3d352c]">{{ $template }}</div>
+                            @foreach ($invitationTemplates as $template)
+                                <a href="{{ $template['url'] }}" target="_blank" rel="noopener" class="group rounded-[8px] border border-[#eadfca] bg-[#fbfaf6] px-4 py-3 text-sm font-medium text-[#3d352c] transition hover:-translate-y-0.5 hover:border-[#d7b46a] hover:bg-white hover:shadow-md">
+                                    <span class="flex items-center justify-between gap-3">
+                                        <span>{{ $template['name'] }}</span>
+                                        <span class="text-xs font-semibold uppercase text-[#8a6a2e] group-hover:text-[#29452f]">Lihat contoh</span>
+                                    </span>
+                                </a>
                             @endforeach
                         </div>
                         <p class="mt-5 text-sm leading-7 text-[#6f6558]">

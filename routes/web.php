@@ -17,13 +17,16 @@ Route::get('/syarat-ketentuan', function () {
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">2. Penggunaan QRIS dan Pembayaran</h2>
             <p class="mt-3">Bali Santih tidak menjual akses aplikasi. QRIS digunakan untuk pembayaran yang terjadi di dalam aplikasi, seperti iuran warga, sesari, urunan, dedosan, dana kegiatan banjar, dan wedding gift pada Undangan Bali. Nominal pembayaran ditentukan oleh pengurus banjar, warga, tamu, atau pemilik acara sesuai konteks masing-masing.</p>
 
-            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">3. Data dan Materi Pelanggan</h2>
+            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">3. Produk/Jasa dan Range Harga IDR</h2>
+            <p class="mt-3">Akses Portal Banjar: Rp0 / gratis. Akses Undangan Bali: Rp0 / gratis. Iuran warga, sesari, urunan, dedosan, dan dana banjar: Rp10.000 - Rp5.000.000 sesuai keputusan pengurus banjar. Wedding Gift atau amplop digital: Rp10.000 - Rp5.000.000 sesuai pilihan sukarela tamu undangan.</p>
+
+            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">4. Data dan Materi Pelanggan</h2>
             <p class="mt-3">Pelanggan bertanggung jawab atas kebenaran data, foto, nama, lokasi, dan materi lain yang diberikan. Bali Santih dapat menolak materi yang melanggar hukum, mengandung penipuan, atau tidak sesuai dengan layanan.</p>
 
-            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">4. Status Transaksi</h2>
+            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">5. Status Transaksi</h2>
             <p class="mt-3">Status pembayaran ditampilkan atau dicatat di aplikasi setelah proses pembayaran berhasil diverifikasi oleh sistem pembayaran. Pengguna bertanggung jawab memastikan nominal dan tujuan pembayaran sudah benar sebelum melakukan pembayaran.</p>
 
-            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">5. Kontak Resmi</h2>
+            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">6. Kontak Resmi</h2>
             <p class="mt-3">Pertanyaan layanan dapat dikirim ke admin.balisantih@gmail.com. Alamat operasional Bali Santih berada di Denpasar, Bali, Indonesia.</p>
         ',
     ]);
