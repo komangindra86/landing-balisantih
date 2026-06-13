@@ -53,6 +53,13 @@
             ['title' => 'Bayar dan Catat', 'text' => 'Pembayaran tercatat di aplikasi sehingga pengurus atau pemilik acara dapat memantau transaksi.'],
         ];
 
+        $paymentFlow = [
+            ['title' => 'Warga atau tamu membayar', 'text' => 'Pengguna memilih iuran, dana banjar, atau wedding gift, lalu melakukan pembayaran melalui QRIS.'],
+            ['title' => 'Dana diproses payment gateway', 'text' => 'Dana pembayaran diterima dan disettle terlebih dahulu oleh payment gateway pada akun merchant Bali Santih sesuai ketentuan penyedia pembayaran.'],
+            ['title' => 'Transaksi dicatat per tujuan', 'text' => 'Aplikasi mencatat pembayaran untuk banjar, kegiatan, pasangan, atau acara yang sesuai agar tidak tercampur secara administrasi.'],
+            ['title' => 'Pencairan ke pihak berhak', 'text' => 'Setelah settlement dan verifikasi, dana dapat dicairkan/diteruskan kepada pengurus banjar atau pemilik acara sesuai catatan transaksi dan ketentuan layanan.'],
+        ];
+
         $priceItems = [
             [
                 'name' => 'Akses Portal Banjar',
@@ -82,6 +89,21 @@
             ['name' => 'Ubud Garden', 'url' => 'https://undangan.balisantih.com/preview/templates/ubud-garden'],
             ['name' => 'Royal Kamasan', 'url' => 'https://undangan.balisantih.com/preview/templates/royal-kamasan'],
         ];
+
+        $demoLinks = [
+            [
+                'name' => 'Demo Aplikasi Banjar',
+                'url' => 'https://banjartesting.balisantih.com/login',
+                'description' => 'Masuk sebagai pengurus untuk melihat dashboard, data warga, kas, iuran, dedosan, laporan, dan pengumuman.',
+                'credential' => 'Akun demo tersedia atas permintaan admin Bali Santih.',
+            ],
+            [
+                'name' => 'Demo Portal Warga',
+                'url' => 'https://banjartesting.balisantih.com/portal',
+                'description' => 'Masuk sebagai warga untuk melihat informasi banjar, pengumuman, dedosan/iuran, kas, profil, dan ubah password.',
+                'credential' => 'Akun warga demo tersedia atas permintaan admin Bali Santih.',
+            ],
+        ];
     @endphp
 
     <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#17130f]/88 text-white shadow-sm backdrop-blur-xl">
@@ -103,6 +125,7 @@
                 <a class="transition hover:text-[#f5d681]" href="#layanan">Aplikasi Gratis</a>
                 <a class="transition hover:text-[#f5d681]" href="#banjar">Banjar Digital</a>
                 <a class="transition hover:text-[#f5d681]" href="#undangan">Undangan Bali</a>
+                <a class="transition hover:text-[#f5d681]" href="#demo">Demo</a>
                 <a class="transition hover:text-[#f5d681]" href="#harga">Harga</a>
                 <a class="transition hover:text-[#f5d681]" href="#alur">Alur</a>
                 <a class="transition hover:text-[#f5d681]" href="#kontak">Kontak</a>
@@ -118,6 +141,7 @@
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#layanan">Aplikasi Gratis</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#banjar">Banjar Digital</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#undangan">Undangan Bali</a>
+                <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#demo">Demo</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#harga">Harga</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#alur">Alur</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#kontak">Kontak</a>
@@ -206,7 +230,7 @@
                     <p class="text-sm font-semibold uppercase text-[#8a6a2e]">Penggunaan QRIS</p>
                     <h2 class="mt-4 text-3xl font-semibold text-[#1f1b16] sm:text-4xl">QRIS dipakai untuk pembayaran yang terjadi di dalam aplikasi</h2>
                     <p class="mt-5 text-lg leading-8 text-[#5f574d]">
-                        Integrasi Midtrans membantu pembayaran tercatat lebih rapi dan mudah dipantau. Fungsi QRIS dibatasi untuk iuran warga, dana kegiatan banjar, dan wedding gift pada undangan digital.
+                        Integrasi payment gateway membantu pembayaran tercatat lebih rapi dan mudah dipantau. Fungsi QRIS dibatasi untuk iuran warga, dana kegiatan banjar, dan wedding gift pada undangan digital.
                     </p>
                 </div>
                 <div class="grid gap-5 sm:grid-cols-2">
@@ -218,6 +242,30 @@
                         <h3 class="text-xl font-semibold text-[#1f1b16]">Undangan Bali</h3>
                         <p class="mt-4 leading-7 text-[#5f574d]">Tamu membuka link undangan, memilih nominal wedding gift secara sukarela, lalu membayar melalui QRIS. Dana tercatat pada dashboard pemilik acara.</p>
                     </article>
+                </div>
+            </div>
+            <div class="mx-auto mt-12 max-w-7xl px-5 lg:px-8">
+                <div class="reveal rounded-[8px] border border-[#e1d3b8] bg-white p-6 shadow-sm">
+                    <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+                        <div>
+                            <p class="text-sm font-semibold uppercase text-[#8a6a2e]">Aliran Dana</p>
+                            <h3 class="mt-3 text-2xl font-semibold text-[#1f1b16]">Dana tidak langsung masuk ke banjar atau pasangan saat QRIS discan</h3>
+                            <p class="mt-4 leading-7 text-[#5f574d]">
+                                Pembayaran diproses terlebih dahulu oleh payment gateway pada akun merchant Bali Santih. Setelah transaksi berhasil dan settlement, aplikasi mencatat dana tersebut sesuai tujuan pembayaran, lalu pencairan dilakukan kepada pihak yang berhak.
+                            </p>
+                        </div>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            @foreach ($paymentFlow as $flow)
+                                <article class="rounded-[8px] border border-[#eadfca] bg-[#fbfaf6] p-5">
+                                    <h4 class="font-semibold text-[#1f1b16]">{{ $flow['title'] }}</h4>
+                                    <p class="mt-3 text-sm leading-6 text-[#5f574d]">{{ $flow['text'] }}</p>
+                                </article>
+                            @endforeach
+                        </div>
+                    </div>
+                    <p class="mt-6 rounded-[8px] bg-[#f3efe5] px-4 py-3 text-sm leading-6 text-[#5f574d]">
+                        Saat pengguna scan QRIS, nama yang tampil mengikuti nama merchant/sub-merchant yang terdaftar pada payment gateway. Karena itu halaman pembayaran menampilkan tujuan pembayaran dan catatan transaksi agar pengguna memahami dana diproses oleh Bali Santih sebagai penyedia layanan sebelum diteruskan sesuai tujuan.
+                    </p>
                 </div>
             </div>
         </section>
@@ -302,6 +350,47 @@
                         <p class="mt-5 text-sm leading-7 text-[#6f6558]">
                             Undangan dapat dilengkapi countdown, galeri, backsound, peta lokasi, tombol berbagi, dan Wedding Gift QRIS opsional untuk amplop digital dari tamu.
                         </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="bg-white py-20 sm:py-24">
+            <div class="mx-auto max-w-7xl px-5 lg:px-8">
+                <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+                    <div class="reveal">
+                        <p class="text-sm font-semibold uppercase text-[#8a6a2e]">Demo Aplikasi</p>
+                        <h2 class="mt-4 text-3xl font-semibold text-[#1f1b16] sm:text-4xl">Coba demo Banjar Digital dan Portal Warga</h2>
+                        <p class="mt-5 text-lg leading-8 text-[#5f574d]">
+                            Demo disediakan agar calon pengguna dan reviewer dapat melihat alur kerja aplikasi banjar, portal warga, dan contoh undangan digital sebelum menggunakan layanan.
+                        </p>
+                    </div>
+                    <div class="grid gap-5">
+                        @foreach ($demoLinks as $demo)
+                            <article class="reveal rounded-[8px] border border-[#e1d3b8] bg-[#fbfaf6] p-6">
+                                <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-[#1f1b16]">{{ $demo['name'] }}</h3>
+                                        <p class="mt-3 leading-7 text-[#5f574d]">{{ $demo['description'] }}</p>
+                                        <p class="mt-4 rounded-[8px] bg-white px-4 py-3 text-sm font-medium text-[#3d352c]">{{ $demo['credential'] }}</p>
+                                    </div>
+                                    <a href="{{ $demo['url'] }}" target="_blank" rel="noopener" class="inline-flex shrink-0 items-center justify-center rounded-full bg-[#29452f] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1f3524]">
+                                        Buka Demo
+                                    </a>
+                                </div>
+                            </article>
+                        @endforeach
+                        <article class="reveal rounded-[8px] border border-[#e1d3b8] bg-[#fbfaf6] p-6">
+                            <h3 class="text-xl font-semibold text-[#1f1b16]">Demo Undangan Bali</h3>
+                            <p class="mt-3 leading-7 text-[#5f574d]">Contoh template Undangan Bali tersedia pada bagian Undangan Bali dan dapat dibuka langsung tanpa login.</p>
+                            <div class="mt-5 flex flex-wrap gap-3">
+                                @foreach ($invitationTemplates as $template)
+                                    <a href="{{ $template['url'] }}" target="_blank" rel="noopener" class="rounded-full border border-[#d7b46a] bg-white px-4 py-2 text-sm font-semibold text-[#3d352c] transition hover:border-[#29452f] hover:text-[#29452f]">
+                                        {{ $template['name'] }}
+                                    </a>
+                                @endforeach
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>

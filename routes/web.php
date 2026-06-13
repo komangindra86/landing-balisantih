@@ -16,6 +16,7 @@ Route::get('/syarat-ketentuan', function () {
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">2. Penggunaan QRIS dan Pembayaran</h2>
             <p class="mt-3">Bali Santih tidak menjual akses aplikasi. QRIS digunakan untuk pembayaran yang terjadi di dalam aplikasi, seperti iuran warga, sesari, urunan, dedosan, dana kegiatan banjar, dan wedding gift pada Undangan Bali. Nominal pembayaran ditentukan oleh pengurus banjar, warga, tamu, atau pemilik acara sesuai konteks masing-masing.</p>
+            <p class="mt-3">Pembayaran QRIS diproses terlebih dahulu oleh payment gateway pada akun merchant Bali Santih. Setelah transaksi berhasil dan settlement, aplikasi mencatat tujuan pembayaran berdasarkan banjar, kegiatan, pasangan, atau acara terkait, lalu dana dapat dicairkan atau diteruskan kepada pihak yang berhak sesuai catatan transaksi dan ketentuan layanan.</p>
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">3. Produk/Jasa dan Range Harga IDR</h2>
             <p class="mt-3">Akses Portal Banjar: Rp0 / gratis. Akses Undangan Bali: Rp0 / gratis. Iuran warga, sesari, urunan, dedosan, dan dana banjar: Rp10.000 - Rp5.000.000 sesuai keputusan pengurus banjar. Wedding Gift atau amplop digital: Rp10.000 - Rp5.000.000 sesuai pilihan sukarela tamu undangan.</p>
