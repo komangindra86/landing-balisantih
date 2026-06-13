@@ -95,13 +95,13 @@
                 'name' => 'Demo Aplikasi Banjar',
                 'url' => 'https://banjartesting.balisantih.com/login',
                 'description' => 'Masuk sebagai pengurus untuk melihat dashboard, data warga, kas, iuran, dedosan, laporan, dan pengumuman.',
-                'credential' => 'Akun demo tersedia atas permintaan admin Bali Santih.',
+                'credential' => 'Email: demo.banjar@balisantih.com | Password: DemoBaliSantih123',
             ],
             [
                 'name' => 'Demo Portal Warga',
                 'url' => 'https://banjartesting.balisantih.com/portal',
                 'description' => 'Masuk sebagai warga untuk melihat informasi banjar, pengumuman, dedosan/iuran, kas, profil, dan ubah password.',
-                'credential' => 'Akun warga demo tersedia atas permintaan admin Bali Santih.',
+                'credential' => 'Email: demo.warga@balisantih.com | Password: DemoBaliSantih123',
             ],
         ];
     @endphp
