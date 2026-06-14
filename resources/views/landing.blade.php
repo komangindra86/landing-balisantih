@@ -89,6 +89,7 @@
             ['name' => 'Ubud Garden', 'url' => 'https://undangan.balisantih.com/preview/templates/ubud-garden'],
             ['name' => 'Royal Kamasan', 'url' => 'https://undangan.balisantih.com/preview/templates/royal-kamasan'],
         ];
+        $weddingPaymentDemoUrl = 'https://undangan.balisantih.com/demo/wedding-gift-xendit';
 
         $demoLinks = [
             [
@@ -381,8 +382,16 @@
                             </article>
                         @endforeach
                         <article class="reveal rounded-[8px] border border-[#e1d3b8] bg-[#fbfaf6] p-6">
-                            <h3 class="text-xl font-semibold text-[#1f1b16]">Demo Undangan Bali</h3>
-                            <p class="mt-3 leading-7 text-[#5f574d]">Contoh template Undangan Bali tersedia pada bagian Undangan Bali dan dapat dibuka langsung tanpa login.</p>
+                            <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                                <div>
+                                    <h3 class="text-xl font-semibold text-[#1f1b16]">Demo Undangan Bali + Wedding Gift</h3>
+                                    <p class="mt-3 leading-7 text-[#5f574d]">Contoh undangan dapat dibuka tanpa login. Demo khusus Wedding Gift memakai Xendit mode tes agar reviewer dapat mencoba alur pembayaran dari awal sampai link pembayaran dibuat.</p>
+                                    <p class="mt-4 rounded-[8px] bg-white px-4 py-3 text-sm font-medium text-[#3d352c]">Mode tes: tidak ada uang asli yang masuk. Biaya layanan ditampilkan transparan sebelum pembayaran.</p>
+                                </div>
+                                <a href="{{ $weddingPaymentDemoUrl }}" target="_blank" rel="noopener" class="inline-flex shrink-0 items-center justify-center rounded-full bg-[#29452f] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[#1f3524]">
+                                    Coba Payment Demo
+                                </a>
+                            </div>
                             <div class="mt-5 flex flex-wrap gap-3">
                                 @foreach ($invitationTemplates as $template)
                                     <a href="{{ $template['url'] }}" target="_blank" rel="noopener" class="rounded-full border border-[#d7b46a] bg-white px-4 py-2 text-sm font-semibold text-[#3d352c] transition hover:border-[#29452f] hover:text-[#29452f]">
