@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Bali Santih menyediakan aplikasi portal banjar dan Undangan Bali gratis. QRIS digunakan untuk iuran warga, dana kegiatan banjar, dan wedding gift.">
+    <meta name="description" content="Bali Santih adalah platform digital yang dikelola oleh PT Bali Santih Digital, menyediakan aplikasi portal banjar dan Undangan Bali tanpa biaya akses aplikasi.">
     <title>Bali Santih - Banjar Digital dan Undangan Bali</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -165,7 +165,7 @@
                         Portal banjar dan Undangan Bali gratis untuk masyarakat Bali
                     </h1>
                     <p class="mt-6 max-w-2xl text-base leading-8 text-white/80 sm:text-lg">
-                        Bali Santih menyediakan aplikasi portal banjar dan Undangan Bali tanpa biaya akses aplikasi. QRIS digunakan untuk memudahkan pembayaran iuran warga, dana kegiatan banjar, dan wedding gift secara transparan.
+                        Bali Santih adalah platform digital yang dikelola oleh PT Bali Santih Digital menyediakan aplikasi portal banjar dan Undangan Bali tanpa biaya akses aplikasi. QRIS digunakan untuk memudahkan pembayaran iuran warga, dana kegiatan banjar, dan wedding gift secara transparan.
                     </p>
                     <div class="mt-9 flex flex-col gap-3 sm:flex-row">
                         <a href="#layanan" class="inline-flex items-center justify-center rounded-full bg-[#d7b46a] px-6 py-3.5 text-sm font-semibold text-[#17130f] shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#efcf82]">
@@ -441,7 +441,7 @@
                         </div>
                         <div>
                             <dt class="font-semibold text-[#f5d681]">NIB</dt>
-                            <dd class="mt-1 text-white/82">220620006618</dd>
+                            <dd class="mt-1 text-white/82">2206260006618</dd>
                         </div>
                         <div>
                             <dt class="font-semibold text-[#f5d681]">Nama Merchant</dt>
@@ -475,7 +475,7 @@
                     <p class="text-xl font-semibold">Bali Santih</p>
                     <p class="mt-2 text-sm text-white/62">Ngayah lewat teknologi untuk Bali.</p>
                     <p class="mt-4 text-sm font-medium text-white/76">PT Bali Santih Digital</p>
-                    <p class="mt-1 text-sm text-white/62">NIB: 220620006618</p>
+                    <p class="mt-1 text-sm text-white/62">NIB: 2206260006618</p>
                 </div>
                 <div class="text-sm leading-7 text-white/62 sm:text-right">
                     <p>admin.balisantih@gmail.com</p>

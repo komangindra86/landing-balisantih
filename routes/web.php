@@ -28,7 +28,7 @@ Route::get('/syarat-ketentuan', function () {
             <p class="mt-3">Status pembayaran ditampilkan atau dicatat di aplikasi setelah proses pembayaran berhasil diverifikasi oleh sistem pembayaran. Pengguna bertanggung jawab memastikan nominal dan tujuan pembayaran sudah benar sebelum melakukan pembayaran.</p>
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">6. Kontak Resmi</h2>
-            <p class="mt-3">Pertanyaan layanan dapat dikirim ke admin.balisantih@gmail.com. Layanan Bali Santih dikelola oleh PT Bali Santih Digital dengan NIB 220620006618. Alamat operasional Bali Santih berada di Denpasar, Bali, Indonesia.</p>
+            <p class="mt-3">Pertanyaan layanan dapat dikirim ke admin.balisantih@gmail.com. Layanan Bali Santih dikelola oleh PT Bali Santih Digital dengan NIB 2206260006618. Alamat operasional Bali Santih berada di Denpasar, Bali, Indonesia.</p>
         ',
     ]);
 })->name('terms');
