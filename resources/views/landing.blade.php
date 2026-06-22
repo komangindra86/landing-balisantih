@@ -436,6 +436,14 @@
                 <div class="reveal rounded-[8px] border border-white/12 bg-white/[0.07] p-6">
                     <dl class="space-y-5 text-sm">
                         <div>
+                            <dt class="font-semibold text-[#f5d681]">Badan Usaha</dt>
+                            <dd class="mt-1 text-white/82">PT Bali Santih Digital</dd>
+                        </div>
+                        <div>
+                            <dt class="font-semibold text-[#f5d681]">NIB</dt>
+                            <dd class="mt-1 text-white/82">220620006618</dd>
+                        </div>
+                        <div>
                             <dt class="font-semibold text-[#f5d681]">Nama Merchant</dt>
                             <dd class="mt-1 text-white/82">Bali Santih</dd>
                         </div>
@@ -466,6 +474,8 @@
                 <div>
                     <p class="text-xl font-semibold">Bali Santih</p>
                     <p class="mt-2 text-sm text-white/62">Ngayah lewat teknologi untuk Bali.</p>
+                    <p class="mt-4 text-sm font-medium text-white/76">PT Bali Santih Digital</p>
+                    <p class="mt-1 text-sm text-white/62">NIB: 220620006618</p>
                 </div>
                 <div class="text-sm leading-7 text-white/62 sm:text-right">
                     <p>admin.balisantih@gmail.com</p>

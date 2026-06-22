@@ -33,7 +33,10 @@
 
     <footer class="border-t border-[#eadfca] bg-white py-8">
         <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 text-sm text-[#6f6558] sm:flex-row sm:items-center sm:justify-between">
-            <p>&copy; {{ date('Y') }} Bali Santih. All rights reserved.</p>
+            <div>
+                <p>&copy; {{ date('Y') }} Bali Santih. All rights reserved.</p>
+                <p class="mt-1">PT Bali Santih Digital - NIB: 220620006618</p>
+            </div>
             <p>admin.balisantih@gmail.com - Denpasar, Bali, Indonesia</p>
         </div>
     </footer>
