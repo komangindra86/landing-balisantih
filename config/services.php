@@ -28,6 +28,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ipaymu' => [
+        'va' => env('IPAYMU_VA'),
+        'api_key' => env('IPAYMU_API_KEY'),
+        'sandbox' => env('IPAYMU_SANDBOX', true),
+        'expiry_hours' => 24,
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

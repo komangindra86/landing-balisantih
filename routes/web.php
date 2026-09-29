@@ -1,10 +1,24 @@
 <?php
 
+use App\Http\Controllers\IpaymuNotificationController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing');
 })->name('home');
+
+Route::get('/pesan/{product}', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/pesan/{product}', [OrderController::class, 'store'])
+    ->middleware('throttle:6,1')
+    ->name('orders.store');
+Route::get('/pesanan/{order}/{token}', [OrderController::class, 'show'])->name('orders.show');
+Route::post('/pesanan/{order}/{token}/bayar', [OrderController::class, 'pay'])
+    ->middleware('throttle:10,1')
+    ->name('orders.pay');
+Route::post('/pembayaran/ipaymu/notify', IpaymuNotificationController::class)
+    ->middleware('throttle:60,1')
+    ->name('payments.ipaymu.notify');
 
 Route::get('/syarat-ketentuan', function () {
     return view('legal', [
@@ -13,13 +27,16 @@ Route::get('/syarat-ketentuan', function () {
         'content' => '
             <h2 class="text-xl font-semibold text-[#1f1b16]">1. Ruang Lingkup Layanan</h2>
             <p class="mt-3">Bali Santih menyediakan aplikasi portal banjar dan Undangan Bali digital yang dapat digunakan gratis. Aplikasi membantu pengurus banjar mengelola data warga, pengumuman, kas, iuran, dan membantu pasangan membuat undangan digital bernuansa Bali.</p>
+            <p class="mt-3">Selain akses aplikasi yang gratis, Bali Santih menyediakan layanan pendukung berbayar yang dapat dipesan melalui halaman Layanan & Harga di balisantih.com, yaitu server dan domain tahunan Banjar Digital, desain template custom Undangan Bali, dan revisi template custom.</p>
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">2. Penggunaan QRIS dan Pembayaran</h2>
             <p class="mt-3">Bali Santih tidak menjual akses aplikasi. QRIS digunakan untuk pembayaran yang terjadi di dalam aplikasi, seperti iuran warga, sesari, urunan, dedosan, dana kegiatan banjar, dan wedding gift pada Undangan Bali. Nominal pembayaran ditentukan oleh pengurus banjar, warga, tamu, atau pemilik acara sesuai konteks masing-masing.</p>
             <p class="mt-3">Pembayaran QRIS diproses terlebih dahulu oleh payment gateway pada akun merchant Bali Santih. Setelah transaksi berhasil dan settlement, aplikasi mencatat tujuan pembayaran berdasarkan banjar, kegiatan, pasangan, atau acara terkait, lalu dana dapat dicairkan atau diteruskan kepada pihak yang berhak sesuai catatan transaksi dan ketentuan layanan.</p>
+            <p class="mt-3">Pembayaran layanan pendukung diproses melalui payment gateway iPaymu dengan pilihan Virtual Account bank, QRIS, atau gerai retail. Untuk layanan dengan harga pasti, pelanggan diarahkan ke halaman pembayaran iPaymu setelah mengirim pesanan. Untuk template custom, tautan pembayaran dikirim setelah harga final disepakati. Tautan pembayaran berlaku 24 jam, biaya transaksi payment gateway ditanggung Bali Santih, dan layanan diproses setelah pembayaran terkonfirmasi.</p>
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">3. Produk/Jasa dan Range Harga IDR</h2>
             <p class="mt-3">Akses Portal Banjar: Rp0 / gratis. Akses Undangan Bali: Rp0 / gratis. Iuran warga, sesari, urunan, dedosan, dan dana banjar: Rp10.000 - Rp5.000.000 sesuai keputusan pengurus banjar. Wedding Gift atau amplop digital: Rp10.000 - Rp5.000.000 sesuai pilihan sukarela tamu undangan.</p>
+            <p class="mt-3">Layanan pendukung: Banjar Digital server dan domain tahunan Rp1.750.000 per tahun (server Rp1.500.000 dan domain Rp250.000). Template Basic Undangan Bali: gratis. Template Custom Standar: Rp25.000 - Rp100.000. Template Custom Animasi: Rp100.000 - Rp250.000. Harga final template custom ditentukan berdasarkan tingkat kerumitan desain dan disampaikan melalui penawaran sebelum pengerjaan. Biaya revisi template custom: Rp5.000 per revisi.</p>
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">4. Data dan Materi Pelanggan</h2>
             <p class="mt-3">Pelanggan bertanggung jawab atas kebenaran data, foto, nama, lokasi, dan materi lain yang diberikan. Bali Santih dapat menolak materi yang melanggar hukum, mengandung penipuan, atau tidak sesuai dengan layanan.</p>
@@ -73,7 +90,10 @@ Route::get('/refund-pembatalan', function () {
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">4. Waktu Proses Refund</h2>
             <p class="mt-3">Refund yang disetujui diproses sesuai hasil verifikasi pengurus banjar, pemilik acara, atau pihak terkait. Lama dana diterima dapat bergantung pada bank atau penyedia pembayaran.</p>
 
-            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">5. Kontak Refund</h2>
+            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">5. Layanan Pendukung Berbayar</h2>
+            <p class="mt-3">Pesanan layanan pendukung (Banjar Digital tahunan, template custom, dan revisi) dapat dibatalkan tanpa biaya selama pembayaran belum dilakukan. Pembayaran yang sudah diterima dapat dikembalikan apabila pesanan dibatalkan sebelum pengerjaan dimulai. Setelah desain mulai dikerjakan, atau setelah server dan domain diaktifkan, pembayaran tidak dapat dikembalikan kecuali layanan tidak dapat kami berikan.</p>
+
+            <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">6. Kontak Refund</h2>
             <p class="mt-3">Permintaan bantuan terkait refund atau pembatalan dapat dikirim ke admin.balisantih@gmail.com dengan menyertakan nama pengirim, tanggal transaksi, nominal, tujuan pembayaran, bukti pembayaran, dan alasan permintaan.</p>
         ',
     ]);

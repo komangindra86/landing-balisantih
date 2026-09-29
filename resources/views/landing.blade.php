@@ -95,6 +95,16 @@
         ];
 
         $weddingPaymentDemoUrl = 'https://undangan.balisantih.com/demo/wedding-gift-xendit';
+
+        $services = config('layanan.products');
+        $banjarService = $services['banjar-digital-tahunan'];
+        $invitationServices = collect($services)->filter(fn ($service) => $service['application'] === 'Undangan Bali');
+
+        $orderSteps = [
+            ['title' => 'Pilih layanan dan isi data', 'text' => 'Lengkapi data pemesan dan kebutuhan Anda melalui formulir singkat.'],
+            ['title' => 'Bayar dengan aman', 'text' => 'Bayar melalui iPaymu dengan Virtual Account, QRIS, atau gerai retail. Untuk desain custom, tautan pembayaran dikirim setelah harga disepakati.'],
+            ['title' => 'Layanan diproses', 'text' => 'Pembayaran terkonfirmasi otomatis, lalu tim kami mengerjakan layanan dan mengabari Anda.'],
+        ];
     @endphp
 
     <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#17130f]/90 text-white shadow-sm backdrop-blur-xl">
@@ -111,6 +121,7 @@
 
             <div class="hidden items-center gap-7 text-sm font-medium text-white/75 lg:flex">
                 <a class="transition hover:text-[#f5d681]" href="#aplikasi">Aplikasi</a>
+                <a class="transition hover:text-[#f5d681]" href="#layanan">Layanan</a>
                 <a class="transition hover:text-[#f5d681]" href="#tentang">Tentang</a>
                 <a class="transition hover:text-[#f5d681]" href="#ngayah">Konsep Ngayah</a>
                 <a class="transition hover:text-[#f5d681]" href="#transparansi">Transparansi</a>
@@ -135,6 +146,7 @@
         <div class="hidden border-t border-white/10 bg-[#17130f]/98 px-5 pb-5 pt-2 text-sm text-white/80 lg:hidden" data-mobile-menu>
             <div class="mx-auto flex max-w-7xl flex-col gap-1">
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#aplikasi">Aplikasi</a>
+                <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#layanan">Layanan</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#tentang">Tentang</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#ngayah">Konsep Ngayah</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#transparansi">Transparansi</a>
@@ -234,6 +246,103 @@
                                 </a>
                             </div>
                         </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section id="layanan" class="scroll-mt-20 border-t border-[#ece3d2] bg-[#fbfaf6] py-20 sm:py-24">
+            <div class="mx-auto max-w-7xl px-5 lg:px-8">
+                <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+                    <div class="reveal">
+                        <p class="text-sm font-semibold uppercase text-[#8a6a2e]">Layanan & Harga</p>
+                        <h2 class="mt-4 text-3xl font-semibold leading-tight text-[#1f1b16] sm:text-4xl">Aplikasi tetap gratis, layanan pendukung dengan harga terbuka</h2>
+                    </div>
+                    <p class="reveal max-w-2xl text-lg leading-8 text-[#5f574d] lg:justify-self-end">
+                        Semua aplikasi Bali Santih dapat digunakan tanpa biaya lisensi. Untuk kebutuhan tambahan seperti alamat web sendiri bagi banjar atau desain undangan khusus, Anda dapat memesannya langsung di sini.
+                    </p>
+                </div>
+
+                <div class="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+                    <article class="reveal flex flex-col overflow-hidden rounded-[8px] bg-[#29452f] text-white">
+                        <div class="flex-1 p-6 sm:p-8">
+                            <p class="text-xs font-semibold uppercase text-[#f5d681]">{{ $banjarService['application'] }}</p>
+                            <h3 class="mt-3 text-2xl font-semibold">Server & domain tahunan</h3>
+                            <p class="mt-4 leading-7 text-white/72">{{ $banjarService['summary'] }}</p>
+
+                            <p class="mt-8 flex flex-wrap items-baseline gap-x-2">
+                                <span class="text-4xl font-semibold">{{ \App\Support\Rupiah::forProduct($banjarService) }}</span>
+                                <span class="text-sm text-white/60">{{ $banjarService['unit'] }}</span>
+                            </p>
+                            <dl class="mt-5 divide-y divide-white/10 border-y border-white/10 text-sm">
+                                @foreach ($banjarService['breakdown'] as $line)
+                                    <div class="flex justify-between gap-4 py-3">
+                                        <dt class="text-white/65">{{ $line['label'] }}</dt>
+                                        <dd class="text-white/90">{{ \App\Support\Rupiah::format($line['amount']) }} / tahun</dd>
+                                    </div>
+                                @endforeach
+                            </dl>
+                            <ul class="mt-6 grid gap-3 text-sm text-white/85">
+                                @foreach ($banjarService['includes'] as $include)
+                                    <li class="flex items-center gap-2.5">
+                                        <svg class="h-4 w-4 shrink-0 text-[#f5d681]" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                            <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <span>{{ $include }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="border-t border-white/10 p-6 sm:px-8">
+                            <a href="{{ route('orders.create', 'banjar-digital-tahunan') }}" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d7b46a] px-6 py-3.5 text-sm font-semibold text-[#17130f] transition hover:-translate-y-0.5 hover:bg-[#efcf82]">
+                                Pesan Sekarang
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="reveal flex flex-col overflow-hidden rounded-[8px] border border-[#e4dac7] bg-white">
+                        <div class="p-6 sm:p-8">
+                            <p class="text-xs font-semibold uppercase text-[#8a6a2e]">Undangan Bali</p>
+                            <h3 class="mt-3 text-2xl font-semibold text-[#1f1b16]">Template undangan & desain custom</h3>
+                            <p class="mt-4 leading-7 text-[#5f574d]">Mulai dengan template gratis, atau pesan desain khusus sesuai tema, warna, dan cerita acara Anda.</p>
+                        </div>
+                        <ul class="flex-1 divide-y divide-[#eee5d6] border-t border-[#eee5d6]">
+                            @foreach ($invitationServices as $slug => $service)
+                                <li class="flex flex-col gap-4 px-6 py-5 sm:px-8 xl:flex-row xl:items-center xl:justify-between">
+                                    <div class="xl:max-w-xs">
+                                        <p class="font-semibold text-[#1f1b16]">{{ $service['name'] }}</p>
+                                        <p class="mt-1 text-sm leading-6 text-[#6f6558]">{{ $service['summary'] }}</p>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-5 xl:justify-end">
+                                        <p class="whitespace-nowrap xl:text-right">
+                                            <span class="block font-semibold text-[#29452f]">{{ \App\Support\Rupiah::forProduct($service) }}</span>
+                                            <span class="block text-xs text-[#8b8175]">{{ $service['unit'] ?? ($service['pricing'] === 'quote' ? 'kisaran harga' : 'tanpa biaya') }}</span>
+                                        </p>
+                                        @if ($service['pricing'] === 'free')
+                                            <a href="{{ $service['url'] }}" target="_blank" rel="noopener" class="inline-flex shrink-0 items-center rounded-full border border-[#cdbd9f] px-4 py-2 text-sm font-semibold text-[#3d352c] transition hover:border-[#8a6a2e]">Buka Aplikasi</a>
+                                        @else
+                                            <a href="{{ route('orders.create', $slug) }}" class="inline-flex shrink-0 items-center rounded-full bg-[#29452f] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1f3524]">{{ $service['pricing'] === 'quote' ? 'Ajukan Pesanan' : 'Pesan' }}</a>
+                                        @endif
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                        <p class="border-t border-[#eee5d6] bg-[#faf8f3] px-6 py-5 text-sm leading-6 text-[#5f574d] sm:px-8">
+                            Harga template custom menyesuaikan tingkat kerumitan desain. Ajukan brief Anda terlebih dahulu, lalu kami kirimkan penawaran harga final sebelum pengerjaan dimulai.
+                        </p>
+                    </article>
+                </div>
+
+                <div class="mt-12 grid gap-x-8 gap-y-8 sm:grid-cols-3">
+                    @foreach ($orderSteps as $step)
+                        <div class="reveal border-t border-[#d9cdb8] pt-5">
+                            <span class="text-sm font-semibold text-[#8a6a2e]">{{ sprintf('%02d', $loop->iteration) }}</span>
+                            <h3 class="mt-3 font-semibold text-[#1f1b16]">{{ $step['title'] }}</h3>
+                            <p class="mt-2 text-sm leading-7 text-[#665d52]">{{ $step['text'] }}</p>
+                        </div>
                     @endforeach
                 </div>
             </div>
