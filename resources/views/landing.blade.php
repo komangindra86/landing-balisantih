@@ -32,7 +32,7 @@
                 'url' => 'https://undangan.balisantih.com',
                 'cta' => 'Buka Aplikasi',
                 'tone' => 'bg-[#8b4f38]',
-                'icon' => 'M12 21s-7-4.6-9-9.2C1.5 8.4 3.5 5 5c2 0 3.4 1.1 5 3 1.6-1.9 3-3 5-3 3.5 0 5.5 3.4 4 6.8C19 16.4 12 21 12 21Z',
+                'icon' => 'M12 21s-7-4.6-9-9.2C1.5 8.4 3.5 5 7 5c2 0 3.4 1.1 5 3 1.6-1.9 3-3 5-3 3.5 0 5.5 3.4 4 6.8C19 16.4 12 21 12 21Z',
             ],
             [
                 'name' => 'BaliKos',
@@ -144,12 +144,12 @@
     </header>
 
     <main>
-        <section id="beranda" class="relative isolate min-h-[86vh] overflow-hidden pt-[69px] text-white">
+        <section id="beranda" class="relative isolate flex min-h-[86vh] flex-col overflow-hidden pt-[69px] text-white">
             <img src="{{ asset('images/bali-santih-hero.png') }}" alt="Kehidupan masyarakat Bali yang tumbuh bersama teknologi" class="absolute inset-0 -z-20 h-full w-full object-cover object-center">
             <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(20,17,13,0.96)_0%,rgba(20,17,13,0.82)_48%,rgba(20,17,13,0.25)_100%)]"></div>
             <div class="absolute inset-x-0 bottom-0 -z-10 h-44 bg-[linear-gradient(0deg,rgba(20,17,13,0.72),transparent)]"></div>
 
-            <div class="mx-auto flex min-h-[calc(86vh-69px)] max-w-7xl items-center px-5 py-14 lg:px-8">
+            <div class="mx-auto flex w-full max-w-7xl flex-1 items-center px-5 py-14 lg:px-8">
                 <div class="max-w-3xl reveal">
                     <p class="flex items-center gap-3 text-sm font-semibold text-[#f5d681]">
                         <span class="h-px w-10 bg-[#d7b46a]"></span>
@@ -175,7 +175,7 @@
                 </div>
             </div>
 
-            <div class="absolute inset-x-0 bottom-0 border-t border-white/12 bg-[#17130f]/55 backdrop-blur-md">
+            <div class="border-t border-white/12 bg-[#17130f]/55 backdrop-blur-md">
                 <div class="mx-auto grid max-w-7xl grid-cols-2 px-5 text-xs font-medium text-white/70 sm:grid-cols-4 lg:px-8">
                     @foreach ($applications as $application)
                         <a href="#aplikasi" class="border-white/10 px-3 py-4 transition hover:bg-white/[0.06] hover:text-white sm:border-l sm:first:border-l-0">
