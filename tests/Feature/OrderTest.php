@@ -82,6 +82,20 @@ class OrderTest extends TestCase
             ->assertDontSee(route('orders.create', 'template-basic'));
     }
 
+    public function test_site_shows_faq_and_full_company_contact(): void
+    {
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('id="faq"', false)
+            ->assertSee('Metode pembayaran apa saja yang tersedia?')
+            ->assertSee('Jl. Gemitir No. 75, Denpasar Timur, Kota Denpasar, Bali 80237')
+            ->assertSee('0851-1324-3800')
+            ->assertSee('tel:+6285113243800', false);
+
+        $this->get('/syarat-ketentuan')->assertOk()->assertSee('Jl. Gemitir No. 75')->assertSee('0851-1324-3800');
+        $this->get('/pesan/banjar-digital-tahunan')->assertOk()->assertSee('Jl. Gemitir No. 75');
+    }
+
     public function test_order_page_is_available_for_paid_services_only(): void
     {
         $this->get('/pesan/banjar-digital-tahunan')->assertOk()->assertSee('Rp1.750.000');

@@ -105,6 +105,60 @@
             ['title' => 'Bayar dengan aman', 'text' => 'Bayar melalui iPaymu dengan Virtual Account, QRIS, atau gerai retail. Untuk desain custom, tautan pembayaran dikirim setelah harga disepakati.'],
             ['title' => 'Layanan diproses', 'text' => 'Pembayaran terkonfirmasi otomatis, lalu tim kami mengerjakan layanan dan mengabari Anda.'],
         ];
+
+        $price = fn (string $slug) => \App\Support\Rupiah::forProduct($services[$slug]);
+
+        $faqs = [
+            [
+                'question' => 'Apa itu Bali Santih?',
+                'answer' => 'Bali Santih adalah ekosistem aplikasi digital untuk masyarakat Bali yang dikelola oleh PT Bali Santih Digital. Saat ini terdiri dari Banjar Digital, Undangan Bali, BaliKos, dan Wariga Bali Santih.',
+            ],
+            [
+                'question' => 'Apakah aplikasi Bali Santih berbayar?',
+                'answer' => 'Akses semua aplikasi gratis, tanpa biaya lisensi. Yang berbayar hanya layanan pendukung: Banjar Digital server dan domain tahunan '.$price('banjar-digital-tahunan').' per tahun, Template Custom Standar '.$price('template-custom-standar').', Template Custom Animasi '.$price('template-custom-animasi').', dan revisi template custom '.$price('revisi-template').' per revisi.',
+                'link' => ['label' => 'Lihat Layanan & Harga', 'url' => '#layanan'],
+            ],
+            [
+                'question' => 'Bagaimana cara memesan layanan?',
+                'answer' => 'Pilih layanan pada bagian Layanan & Harga, isi formulir pemesanan, lalu selesaikan pembayaran. Untuk template custom, Anda mengirim brief terlebih dahulu; setelah harga final disepakati, kami mengirimkan tautan pembayaran.',
+            ],
+            [
+                'question' => 'Metode pembayaran apa saja yang tersedia?',
+                'answer' => 'Pembayaran diproses melalui payment gateway iPaymu. Anda dapat membayar dengan Virtual Account bank, QRIS, atau gerai retail. Pilihan metode yang aktif ditampilkan di halaman pembayaran iPaymu.',
+            ],
+            [
+                'question' => 'Berapa lama batas waktu pembayaran?',
+                'answer' => 'Tautan pembayaran berlaku 24 jam. Jika waktunya habis, Anda dapat membuat tautan pembayaran baru dari halaman status pesanan tanpa perlu memesan ulang.',
+            ],
+            [
+                'question' => 'Bagaimana saya tahu pembayaran saya sudah diterima?',
+                'answer' => 'Setelah pembayaran terkonfirmasi, halaman status pesanan otomatis berubah menjadi Lunas. Simpan tautan halaman status dan kode pesanan Anda. Tim kami kemudian menghubungi Anda melalui WhatsApp atau email untuk memproses layanan.',
+            ],
+            [
+                'question' => 'Apakah ada biaya tambahan di luar harga yang tertera?',
+                'answer' => 'Tidak. Biaya transaksi payment gateway ditanggung Bali Santih. Harga final template custom disampaikan melalui penawaran sebelum pengerjaan dimulai, sehingga tidak ada biaya yang muncul tanpa persetujuan Anda.',
+            ],
+            [
+                'question' => 'Bisakah pesanan dibatalkan dan dana dikembalikan?',
+                'answer' => 'Pesanan dapat dibatalkan tanpa biaya selama belum dibayar. Pembayaran yang sudah diterima dapat dikembalikan bila pesanan dibatalkan sebelum pengerjaan dimulai. Setelah desain dikerjakan atau server dan domain diaktifkan, pembayaran tidak dapat dikembalikan kecuali layanan tidak dapat kami berikan.',
+                'link' => ['label' => 'Baca kebijakan Refund & Pembatalan', 'url' => route('refund')],
+            ],
+            [
+                'question' => 'Bagaimana dana iuran banjar dan wedding gift diproses?',
+                'answer' => 'Pembayaran QRIS di Banjar Digital dan Undangan Bali diproses oleh payment gateway pada akun merchant Bali Santih. Setelah transaksi berhasil, aplikasi mencatat tujuan pembayaran, lalu dana dicairkan atau diteruskan kepada banjar atau pemilik acara yang berhak.',
+                'link' => ['label' => 'Lihat Transparansi Pembayaran', 'url' => '#transparansi'],
+            ],
+            [
+                'question' => 'Bagaimana data saya digunakan?',
+                'answer' => 'Data yang Anda berikan hanya digunakan untuk menjalankan layanan, seperti memproses pesanan, menghubungi Anda, dan mencatat transaksi. Data tidak dijual kepada pihak ketiga.',
+                'link' => ['label' => 'Baca Kebijakan Privasi', 'url' => route('privacy')],
+            ],
+            [
+                'question' => 'Bagaimana cara menghubungi Bali Santih?',
+                'answer' => 'Hubungi kami melalui telepon '.config('perusahaan.phone').' atau email '.config('perusahaan.email').'. Kantor kami beralamat di '.config('perusahaan.address').'. Jam layanan '.config('perusahaan.hours').'.',
+                'link' => ['label' => 'Lihat kontak', 'url' => '#kontak'],
+            ],
+        ];
     @endphp
 
     <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#17130f]/90 text-white shadow-sm backdrop-blur-xl">
@@ -125,6 +179,7 @@
                 <a class="transition hover:text-[#f5d681]" href="#tentang">Tentang</a>
                 <a class="transition hover:text-[#f5d681]" href="#ngayah">Konsep Ngayah</a>
                 <a class="transition hover:text-[#f5d681]" href="#transparansi">Transparansi</a>
+                <a class="transition hover:text-[#f5d681]" href="#faq">FAQ</a>
                 <a class="transition hover:text-[#f5d681]" href="#kontak">Kontak</a>
             </div>
 
@@ -150,6 +205,7 @@
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#tentang">Tentang</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#ngayah">Konsep Ngayah</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#transparansi">Transparansi</a>
+                <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#faq">FAQ</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#kontak">Kontak</a>
             </div>
         </div>
@@ -503,6 +559,37 @@
             </div>
         </section>
 
+        <section id="faq" class="scroll-mt-20 bg-white py-20 sm:py-24">
+            <div class="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
+                <div class="reveal">
+                    <p class="text-sm font-semibold uppercase text-[#8a6a2e]">Pertanyaan Umum</p>
+                    <h2 class="mt-4 text-3xl font-semibold leading-tight text-[#1f1b16] sm:text-4xl">Hal yang sering ditanyakan</h2>
+                    <p class="mt-5 text-lg leading-8 text-[#5f574d]">
+                        Jawaban singkat seputar aplikasi, pemesanan layanan, pembayaran, dan pengembalian dana. Belum menemukan jawabannya? Hubungi kami.
+                    </p>
+                </div>
+
+                <div class="reveal divide-y divide-[#e8dfcf] border-y border-[#e8dfcf]">
+                    @foreach ($faqs as $faq)
+                        <details class="group py-1">
+                            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-4 font-semibold text-[#1f1b16] [&::-webkit-details-marker]:hidden">
+                                {{ $faq['question'] }}
+                                <svg class="h-5 w-5 shrink-0 text-[#8a6a2e] transition group-open:rotate-45" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </summary>
+                            <div class="pb-5 pr-10 text-sm leading-7 text-[#5f574d]">
+                                <p>{{ $faq['answer'] }}</p>
+                                @isset($faq['link'])
+                                    <a href="{{ $faq['link']['url'] }}" class="mt-2 inline-flex font-semibold text-[#29452f] underline underline-offset-4">{{ $faq['link']['label'] }}</a>
+                                @endisset
+                            </div>
+                        </details>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
         <section id="kontak" class="scroll-mt-20 bg-[#17130f] py-20 text-white sm:py-24">
             <div class="mx-auto max-w-7xl px-5 lg:px-8">
                 <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
@@ -522,23 +609,27 @@
                     <dl class="reveal divide-y divide-white/10 border-y border-white/10 text-sm">
                         <div class="grid grid-cols-[110px_1fr] gap-4 py-4">
                             <dt class="text-white/48">Perusahaan</dt>
-                            <dd class="text-white/82">PT Bali Santih Digital</dd>
+                            <dd class="text-white/82">{{ config('perusahaan.name') }}</dd>
                         </div>
                         <div class="grid grid-cols-[110px_1fr] gap-4 py-4">
                             <dt class="text-white/48">NIB</dt>
-                            <dd class="text-white/82">2206260006618</dd>
+                            <dd class="text-white/82">{{ config('perusahaan.nib') }}</dd>
+                        </div>
+                        <div class="grid grid-cols-[110px_1fr] gap-4 py-4">
+                            <dt class="text-white/48">Alamat</dt>
+                            <dd class="text-white/82">{{ config('perusahaan.address') }}, Indonesia</dd>
+                        </div>
+                        <div class="grid grid-cols-[110px_1fr] gap-4 py-4">
+                            <dt class="text-white/48">Telepon</dt>
+                            <dd><a class="text-white/82 underline underline-offset-4 hover:text-[#f5d681]" href="tel:{{ config('perusahaan.phone_link') }}">{{ config('perusahaan.phone') }}</a></dd>
                         </div>
                         <div class="grid grid-cols-[110px_1fr] gap-4 py-4">
                             <dt class="text-white/48">Email</dt>
-                            <dd><a class="text-white/82 underline underline-offset-4 hover:text-[#f5d681]" href="mailto:admin.balisantih@gmail.com">admin.balisantih@gmail.com</a></dd>
-                        </div>
-                        <div class="grid grid-cols-[110px_1fr] gap-4 py-4">
-                            <dt class="text-white/48">Lokasi</dt>
-                            <dd class="text-white/82">Denpasar, Bali, Indonesia</dd>
+                            <dd><a class="text-white/82 underline underline-offset-4 hover:text-[#f5d681]" href="mailto:{{ config('perusahaan.email') }}">{{ config('perusahaan.email') }}</a></dd>
                         </div>
                         <div class="grid grid-cols-[110px_1fr] gap-4 py-4">
                             <dt class="text-white/48">Jam layanan</dt>
-                            <dd class="text-white/82">Senin-Sabtu, 09.00-17.00 WITA</dd>
+                            <dd class="text-white/82">{{ config('perusahaan.hours') }}</dd>
                         </div>
                     </dl>
                 </div>
@@ -559,13 +650,14 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-x-5 gap-y-3 text-sm text-white/55 sm:justify-end">
+                    <a class="hover:text-[#f5d681]" href="#faq">FAQ</a>
                     <a class="hover:text-[#f5d681]" href="{{ route('terms') }}">Syarat & Ketentuan</a>
                     <a class="hover:text-[#f5d681]" href="{{ route('privacy') }}">Kebijakan Privasi</a>
                     <a class="hover:text-[#f5d681]" href="{{ route('refund') }}">Refund & Pembatalan</a>
                 </div>
             </div>
             <div class="mt-8 flex flex-col gap-2 border-t border-white/8 pt-6 text-xs text-white/42 sm:flex-row sm:items-center sm:justify-between">
-                <p>PT Bali Santih Digital &middot; NIB 2206260006618</p>
+                <p>{{ config('perusahaan.name') }} &middot; NIB {{ config('perusahaan.nib') }} &middot; {{ config('perusahaan.address') }} &middot; {{ config('perusahaan.phone') }}</p>
                 <p>&copy; {{ date('Y') }} Bali Santih. All rights reserved.</p>
             </div>
         </div>

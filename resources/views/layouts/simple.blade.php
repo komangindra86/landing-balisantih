@@ -35,10 +35,12 @@
     <footer class="border-t border-[#eadfca] bg-white py-8">
         <div class="mx-auto flex max-w-6xl flex-col gap-4 px-5 text-sm text-[#6f6558] sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <p>PT Bali Santih Digital &middot; NIB 2206260006618</p>
-                <p class="mt-1">admin.balisantih@gmail.com &middot; Denpasar, Bali, Indonesia</p>
+                <p>{{ config('perusahaan.name') }} &middot; NIB {{ config('perusahaan.nib') }}</p>
+                <p class="mt-1">{{ config('perusahaan.address') }}</p>
+                <p class="mt-1">{{ config('perusahaan.phone') }} &middot; {{ config('perusahaan.email') }}</p>
             </div>
             <div class="flex flex-wrap gap-x-5 gap-y-2">
+                <a class="hover:text-[#8a6a2e]" href="{{ route('home') }}#faq">FAQ</a>
                 <a class="hover:text-[#8a6a2e]" href="{{ route('terms') }}">Syarat & Ketentuan</a>
                 <a class="hover:text-[#8a6a2e]" href="{{ route('privacy') }}">Kebijakan Privasi</a>
                 <a class="hover:text-[#8a6a2e]" href="{{ route('refund') }}">Refund & Pembatalan</a>

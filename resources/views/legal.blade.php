@@ -24,7 +24,7 @@
     <main class="mx-auto max-w-5xl px-5 py-14">
         <p class="text-sm font-semibold uppercase text-[#8a6a2e]">Kebijakan Layanan</p>
         <h1 class="mt-4 text-3xl font-semibold sm:text-4xl">{{ $title }}</h1>
-        <p class="mt-3 text-sm text-[#6f6558]">Terakhir diperbarui: 29 September 2026</p>
+        <p class="mt-3 text-sm text-[#6f6558]">Terakhir diperbarui: 7 Oktober 2026</p>
 
         <article class="mt-10 rounded-[8px] border border-[#eadfca] bg-white p-6 leading-8 text-[#3d352c] shadow-sm sm:p-8">
             {!! $content !!}
@@ -35,9 +35,12 @@
         <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 text-sm text-[#6f6558] sm:flex-row sm:items-center sm:justify-between">
             <div>
                 <p>&copy; {{ date('Y') }} Bali Santih. All rights reserved.</p>
-                <p class="mt-1">PT Bali Santih Digital - NIB: 2206260006618</p>
+                <p class="mt-1">{{ config('perusahaan.name') }} - NIB: {{ config('perusahaan.nib') }}</p>
             </div>
-            <p>admin.balisantih@gmail.com - Denpasar, Bali, Indonesia</p>
+            <div class="sm:text-right">
+                <p>{{ config('perusahaan.address') }}</p>
+                <p class="mt-1">{{ config('perusahaan.phone') }} - {{ config('perusahaan.email') }}</p>
+            </div>
         </div>
     </footer>
 </body>
