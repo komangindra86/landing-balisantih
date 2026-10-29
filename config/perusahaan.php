@@ -14,7 +14,7 @@ return [
 
     'name' => 'PT Bali Santih Digital',
 
-    'nib' => '2206260006618',
+    'nib' => '2910260229486',
 
     'address' => 'Jl. Gemitir No. 75, Denpasar Timur, Kota Denpasar, Bali 80237',
 

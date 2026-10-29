@@ -429,7 +429,7 @@
                             <dt class="text-3xl font-semibold text-[#29452f]">PT</dt>
                             <dd>
                                 <span class="block font-semibold text-[#1f1b16]">PT Bali Santih Digital</span>
-                                <span class="mt-1 block text-sm leading-6 text-[#6b6257]">NIB 2206260006618</span>
+                                <span class="mt-1 block text-sm leading-6 text-[#6b6257]">NIB {{ config('perusahaan.nib') }}</span>
                             </dd>
                         </div>
                         <div class="grid grid-cols-[90px_1fr] gap-5 py-5 sm:grid-cols-[130px_1fr]">
