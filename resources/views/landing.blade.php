@@ -18,7 +18,7 @@
                 'status' => 'Demo tersedia',
                 'description' => 'Ruang kerja digital untuk membantu pengurus menata data krama, kas, iuran, dedosan, aset, laporan, dan pengumuman banjar.',
                 'features' => ['Administrasi banjar', 'Portal warga', 'Kas dan laporan', 'Akses dari HP'],
-                'url' => 'https://banjartesting.balisantih.com/login',
+                'url' => 'https://demobanjar.balisantih.com/',
                 'cta' => 'Coba Demo',
                 'tone' => 'bg-[#29452f]',
                 'icon' => 'M4 20V8l8-5 8 5v12M8 20v-7h8v7',
@@ -539,13 +539,13 @@
                             <p class="font-semibold text-[#1f1b16]">Demo Pengurus Banjar</p>
                             <p class="mt-2 text-sm leading-6 text-[#5f574d]">Email: demo.banjar@balisantih.com</p>
                             <p class="text-sm leading-6 text-[#5f574d]">Password: DemoBaliSantih123</p>
-                            <a href="https://banjartesting.balisantih.com/login" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo pengurus</a>
+                            <a href="https://demobanjar.balisantih.com/login" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo pengurus</a>
                         </div>
                         <div>
                             <p class="font-semibold text-[#1f1b16]">Demo Portal Warga</p>
                             <p class="mt-2 text-sm leading-6 text-[#5f574d]">Email: demo.warga@balisantih.com</p>
                             <p class="text-sm leading-6 text-[#5f574d]">Password: DemoBaliSantih123</p>
-                            <a href="https://banjartesting.balisantih.com/portal" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo warga</a>
+                            <a href="https://demobanjar.balisantih.com/portal" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo warga</a>
                         </div>
                     </div>
                     <div class="mt-5 flex flex-wrap gap-2 border-t border-[#e8dfcf] pt-5">
