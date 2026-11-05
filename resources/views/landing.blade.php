@@ -545,7 +545,7 @@
                             <p class="font-semibold text-[#1f1b16]">Demo Portal Warga</p>
                             <p class="mt-2 text-sm leading-6 text-[#5f574d]">Email: demo.warga@balisantih.com</p>
                             <p class="text-sm leading-6 text-[#5f574d]">Password: DemoBaliSantih123</p>
-                            <a href="https://demobanjar.balisantih.com/portal" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo warga</a>
+                            <a href="https://portal.balisantih.com/" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo warga</a>
                         </div>
                     </div>
                     <div class="mt-5 flex flex-wrap gap-2 border-t border-[#e8dfcf] pt-5">
