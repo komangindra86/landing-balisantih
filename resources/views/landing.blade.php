@@ -96,6 +96,15 @@
 
         $weddingPaymentDemoUrl = 'https://undangan.balisantih.com/demo/wedding-gift-xendit';
 
+        $demoBanjarAccounts = [
+            'Admin Banjar' => 'admindemobanjar@balisantih.com',
+            'Kelian Adat' => 'keliandemobanjar@balisantih.com',
+            'Penyarikan' => 'penyarikandemobanjar@balisantih.com',
+            'Petengen' => 'petengendemobanjar@balisantih.com',
+            'Kesinoman' => 'kesinomandemobanjar@balisantih.com',
+        ];
+        $demoBanjarPassword = 'balisantih';
+
         $services = config('layanan.products');
         $banjarService = $services['banjar-digital-tahunan'];
         $invitationServices = collect($services)->filter(fn ($service) => $service['application'] === 'Undangan Bali');
@@ -537,14 +546,22 @@
                     <div class="mt-5 grid gap-5 border-t border-[#e8dfcf] pt-5 md:grid-cols-2">
                         <div>
                             <p class="font-semibold text-[#1f1b16]">Demo Pengurus Banjar</p>
-                            <p class="mt-2 text-sm leading-6 text-[#5f574d]">Email: demo.banjar@balisantih.com</p>
-                            <p class="text-sm leading-6 text-[#5f574d]">Password: DemoBaliSantih123</p>
+                            <dl class="mt-2 space-y-1 text-sm leading-6 text-[#5f574d]">
+                                @foreach ($demoBanjarAccounts as $role => $email)
+                                    <div class="flex flex-wrap gap-x-2">
+                                        <dt class="font-medium text-[#3d352c]">{{ $role }}:</dt>
+                                        <dd class="break-all">{{ $email }}</dd>
+                                    </div>
+                                @endforeach
+                            </dl>
+                            <p class="mt-2 text-sm leading-6 text-[#5f574d]">Password semua akun: {{ $demoBanjarPassword }}</p>
                             <a href="https://demobanjar.balisantih.com/login" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo pengurus</a>
                         </div>
                         <div>
                             <p class="font-semibold text-[#1f1b16]">Demo Portal Warga</p>
-                            <p class="mt-2 text-sm leading-6 text-[#5f574d]">Email: demo.warga@balisantih.com</p>
-                            <p class="text-sm leading-6 text-[#5f574d]">Password: DemoBaliSantih123</p>
+                            <p class="mt-2 text-sm leading-6 text-[#5f574d]">Email: wargademobanjar@balisantih.com</p>
+                            <p class="text-sm leading-6 text-[#5f574d]">atau NIK uji: 5171000000000001</p>
+                            <p class="text-sm leading-6 text-[#5f574d]">Password: {{ $demoBanjarPassword }}</p>
                             <a href="https://portal.balisantih.com/" target="_blank" rel="noopener" class="mt-3 inline-flex text-sm font-semibold text-[#29452f] underline underline-offset-4">Buka demo warga</a>
                         </div>
                     </div>
