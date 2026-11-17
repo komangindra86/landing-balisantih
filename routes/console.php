@@ -21,7 +21,7 @@ Artisan::command('pesanan:daftar {--limit=20}', function () {
             $order->product_name.($order->quantity > 1 ? " x{$order->quantity}" : ''),
             $order->customer_name,
             $order->customer_whatsapp,
-            $order->total ? Rupiah::format($order->total) : 'Penawaran',
+            $order->total ? Rupiah::format($order->total) : ($order->isPunia() ? 'Punia' : 'Penawaran'),
             $order->statusLabel(),
         ]),
     );
@@ -44,10 +44,16 @@ Artisan::command('pesanan:tagih {code} {amount?}', function (OrderPayment $payme
 
     $amount = $this->argument('amount');
 
-    if ($order->isQuote()) {
+    if ($order->isQuote() || $order->isPunia()) {
         $product = config("layanan.products.{$order->product}");
 
-        if (! is_numeric($amount) || $amount < $product['price_min'] || $amount > $product['price_max']) {
+        if ($order->isPunia() && (! ctype_digit((string) $amount) || (int) $amount < 1)) {
+            $this->error('Isi nominal punia yang disampaikan pemesan, contoh: pesanan:tagih '.$order->code.' 1500000');
+
+            return 1;
+        }
+
+        if ($order->isQuote() && (! is_numeric($amount) || $amount < $product['price_min'] || $amount > $product['price_max'])) {
             $this->error('Isi harga final antara '.Rupiah::forProduct($product).', contoh: pesanan:tagih '.$order->code.' 75000');
 
             return 1;
@@ -74,4 +80,4 @@ Artisan::command('pesanan:tagih {code} {amount?}', function (OrderPayment $payme
     $this->line($order->statusUrl());
 
     return 0;
-})->purpose('Tetapkan harga final dan buat tagihan iPaymu untuk pesanan');
+})->purpose('Tetapkan harga final atau nominal punia dan buat tagihan iPaymu untuk pesanan');

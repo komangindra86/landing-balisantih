@@ -8,6 +8,8 @@ Route::get('/', function () {
     return view('landing');
 })->name('home');
 
+Route::view('/website-dan-aplikasi', 'website-aplikasi')->name('website');
+
 Route::get('/pesan/{product}', [OrderController::class, 'create'])->name('orders.create');
 Route::post('/pesan/{product}', [OrderController::class, 'store'])
     ->middleware('throttle:6,1')
@@ -27,7 +29,7 @@ Route::get('/syarat-ketentuan', function () {
         'content' => '
             <h2 class="text-xl font-semibold text-[#1f1b16]">1. Ruang Lingkup Layanan</h2>
             <p class="mt-3">Bali Santih menyediakan aplikasi portal banjar dan Undangan Bali digital yang dapat digunakan gratis. Aplikasi membantu pengurus banjar mengelola data warga, pengumuman, kas, iuran, dan membantu pasangan membuat undangan digital bernuansa Bali.</p>
-            <p class="mt-3">Selain akses aplikasi yang gratis, Bali Santih menyediakan layanan pendukung berbayar yang dapat dipesan melalui halaman Layanan & Harga di balisantih.com, yaitu server dan domain tahunan Banjar Digital, desain template custom Undangan Bali, dan revisi template custom.</p>
+            <p class="mt-3">Selain akses aplikasi yang gratis, Bali Santih menyediakan layanan pendukung berbayar yang dapat dipesan melalui halaman Layanan & Harga di balisantih.com, yaitu server dan domain tahunan Banjar Digital, desain template custom Undangan Bali, revisi template custom, serta pembuatan website dan aplikasi custom untuk usaha.</p>
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">2. Penggunaan QRIS dan Pembayaran</h2>
             <p class="mt-3">Bali Santih tidak menjual akses aplikasi. QRIS digunakan untuk pembayaran yang terjadi di dalam aplikasi, seperti iuran warga, sesari, urunan, dedosan, dana kegiatan banjar, dan wedding gift pada Undangan Bali. Nominal pembayaran ditentukan oleh pengurus banjar, warga, tamu, atau pemilik acara sesuai konteks masing-masing.</p>
@@ -37,6 +39,7 @@ Route::get('/syarat-ketentuan', function () {
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">3. Produk/Jasa dan Range Harga IDR</h2>
             <p class="mt-3">Akses Portal Banjar: Rp0 / gratis. Akses Undangan Bali: Rp0 / gratis. Iuran warga, sesari, urunan, dedosan, dan dana banjar: Rp10.000 - Rp5.000.000 sesuai keputusan pengurus banjar. Wedding Gift atau amplop digital: Rp10.000 - Rp5.000.000 sesuai pilihan sukarela tamu undangan.</p>
             <p class="mt-3">Layanan pendukung: Banjar Digital server dan domain tahunan Rp1.750.000 per tahun (server Rp1.500.000 dan domain Rp250.000). Template Basic Undangan Bali: gratis. Template Custom Standar: Rp25.000 - Rp100.000. Template Custom Animasi: Rp100.000 - Rp250.000. Harga final template custom ditentukan berdasarkan tingkat kerumitan desain dan disampaikan melalui penawaran sebelum pengerjaan. Biaya revisi template custom: Rp5.000 per revisi.</p>
+            <p class="mt-3">Pembuatan website dan aplikasi custom untuk usaha menggunakan konsep punia: tidak ada harga baku. Nominal punia ditentukan oleh pelanggan sesuai kemampuan dan ditagihkan melalui tagihan resmi Bali Santih setelah website atau aplikasi diserahterimakan. Konsultasi tidak dipungut biaya. Biaya layanan pihak ketiga seperti domain, hosting, atau server, bila diperlukan, disampaikan dan disepakati sebelum pengerjaan dimulai.</p>
 
             <h2 class="mt-8 text-xl font-semibold text-[#1f1b16]">4. Data dan Materi Pelanggan</h2>
             <p class="mt-3">Pelanggan bertanggung jawab atas kebenaran data, foto, nama, lokasi, dan materi lain yang diberikan. Bali Santih dapat menolak materi yang melanggar hukum, mengandung penipuan, atau tidak sesuai dengan layanan.</p>

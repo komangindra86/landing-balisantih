@@ -24,6 +24,8 @@ return [
     |
     | pricing: "direct" = harga pasti, pesanan langsung menunggu pembayaran.
     |          "quote"  = harga berupa kisaran, admin mengirim penawaran final.
+    |          "punia"  = tanpa harga baku; nominal punia dari pelanggan
+    |                     ditagihkan admin setelah pekerjaan disepakati.
     |          "free"   = gratis, diarahkan ke aplikasi (tidak bisa dipesan).
     |
     */
@@ -77,6 +79,13 @@ return [
             'unit' => 'per revisi',
             'max_quantity' => 10,
             'form' => 'revisi',
+        ],
+        'website-aplikasi' => [
+            'application' => 'Website & Aplikasi Usaha',
+            'name' => 'Website & Aplikasi Custom untuk Usaha',
+            'summary' => 'Isi formulir singkat ini, lalu kami menghubungi Anda untuk berdiskusi sebelum pengerjaan dimulai. Konsultasi tidak dipungut biaya.',
+            'pricing' => 'punia',
+            'form' => 'website',
         ],
     ],
 

@@ -40,6 +40,7 @@
                 <p class="mt-1">{{ config('perusahaan.phone') }} &middot; {{ config('perusahaan.email') }}</p>
             </div>
             <div class="flex flex-wrap gap-x-5 gap-y-2">
+                <a class="hover:text-[#8a6a2e]" href="{{ route('website') }}">Website & Aplikasi</a>
                 <a class="hover:text-[#8a6a2e]" href="{{ route('home') }}#faq">FAQ</a>
                 <a class="hover:text-[#8a6a2e]" href="{{ route('terms') }}">Syarat & Ketentuan</a>
                 <a class="hover:text-[#8a6a2e]" href="{{ route('privacy') }}">Kebijakan Privasi</a>

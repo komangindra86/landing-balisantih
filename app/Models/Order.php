@@ -11,6 +11,8 @@ class Order extends Model
 
     public const STATUS_AWAITING_QUOTE = 'menunggu_penawaran';
 
+    public const STATUS_AWAITING_CONSULTATION = 'menunggu_konsultasi';
+
     public const STATUS_PAID = 'lunas';
 
     public const STATUS_EXPIRED = 'kedaluwarsa';
@@ -25,6 +27,11 @@ class Order extends Model
         'theme' => 'Tema dan warna',
         'reference' => 'Referensi desain',
         'invitation_ref' => 'Undangan yang direvisi',
+        'business_name' => 'Nama usaha',
+        'business_type' => 'Jenis usaha',
+        'project_type' => 'Yang dibutuhkan',
+        'needs' => 'Kebutuhan',
+        'domain_status' => 'Domain',
         'notes' => 'Catatan',
     ];
 
@@ -98,6 +105,11 @@ class Order extends Model
         return $this->pricing === 'quote';
     }
 
+    public function isPunia(): bool
+    {
+        return $this->pricing === 'punia';
+    }
+
     public function isPaid(): bool
     {
         return $this->status === self::STATUS_PAID;
@@ -123,6 +135,7 @@ class Order extends Model
         return match ($this->status) {
             self::STATUS_AWAITING_PAYMENT => 'Menunggu pembayaran',
             self::STATUS_AWAITING_QUOTE => 'Menunggu penawaran harga',
+            self::STATUS_AWAITING_CONSULTATION => 'Menunggu konsultasi',
             self::STATUS_PAID => 'Lunas',
             self::STATUS_EXPIRED => 'Pembayaran kedaluwarsa',
             default => Str::headline($this->status),

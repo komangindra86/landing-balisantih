@@ -12,6 +12,8 @@
         $order->isPaid() => ['Suksma, pembayaran sudah kami terima', 'Pesanan Anda segera kami proses'],
         $order->status === Order::STATUS_EXPIRED => ['Pesanan '.$order->code, 'Waktu pembayaran sudah habis'],
         $order->status === Order::STATUS_AWAITING_QUOTE => ['Suksma, pesanan sudah kami terima', 'Brief Anda sedang kami pelajari'],
+        $order->status === Order::STATUS_AWAITING_CONSULTATION => ['Suksma, cerita usaha Anda sudah kami terima', 'Kami segera menghubungi Anda'],
+        $canPayOnline && $order->isPunia() => ['Suksma atas kepercayaan Anda', 'Silakan berikan punia Anda'],
         $canPayOnline => ['Suksma, pesanan sudah kami terima', 'Selesaikan pembayaran Anda'],
         default => ['Suksma, pesanan sudah kami terima', 'Tagihan segera kami kirimkan'],
     };
@@ -47,6 +49,10 @@
                 Tautan pembayaran sebelumnya sudah tidak berlaku. Anda dapat membuat tautan pembayaran baru untuk pesanan yang sama.
             @elseif ($order->status === Order::STATUS_AWAITING_QUOTE)
                 Tim Bali Santih akan menghubungi Anda melalui WhatsApp atau email untuk konsultasi dan penawaran harga final. Setelah harga disepakati, tautan pembayaran kami kirimkan. Belum ada pembayaran yang perlu dilakukan.
+            @elseif ($order->status === Order::STATUS_AWAITING_CONSULTATION)
+                Tim Bali Santih akan menghubungi Anda melalui WhatsApp atau email pada jam layanan untuk berdiskusi tentang usaha serta website atau aplikasi yang Anda butuhkan. Konsultasi tidak dipungut biaya, dan belum ada pembayaran yang perlu dilakukan.
+            @elseif ($canPayOnline && $order->isPunia())
+                Nominal punia sesuai yang Anda sampaikan. Punia diproses aman melalui iPaymu; Anda dapat memilih Virtual Account bank, QRIS, atau pembayaran di gerai retail. Tautan pembayaran berlaku 24 jam.
             @elseif ($canPayOnline)
                 Pembayaran diproses aman melalui iPaymu. Anda dapat memilih Virtual Account bank, QRIS, atau pembayaran di gerai retail. Tautan pembayaran berlaku 24 jam.
             @else
@@ -64,7 +70,7 @@
             <form method="POST" action="{{ route('orders.pay', ['order' => $order, 'token' => $order->access_token]) }}" class="mt-8">
                 @csrf
                 <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#d7b46a] px-6 py-3.5 text-sm font-semibold text-[#17130f] transition hover:-translate-y-0.5 hover:bg-[#efcf82] sm:w-auto">
-                    {{ $order->status === Order::STATUS_EXPIRED ? 'Buat Tautan Pembayaran Baru' : 'Bayar Sekarang '.Rupiah::format($order->total) }}
+                    {{ $order->status === Order::STATUS_EXPIRED ? 'Buat Tautan Pembayaran Baru' : ($order->isPunia() ? 'Berikan Punia ' : 'Bayar Sekarang ').Rupiah::format($order->total) }}
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -92,9 +98,13 @@
                     <dd class="font-medium text-[#1f1b16]">{{ $order->product_name }}{{ $order->quantity > 1 ? ' × '.$order->quantity : '' }}</dd>
                 </div>
                 <div class="grid gap-1 px-6 py-4 sm:grid-cols-[180px_1fr]">
-                    <dt class="text-[#6f6558]">{{ $order->total === null ? 'Kisaran harga' : 'Total' }}</dt>
+                    <dt class="text-[#6f6558]">{{ $order->isPunia() ? 'Punia' : ($order->total === null ? 'Kisaran harga' : 'Total') }}</dt>
                     <dd class="font-semibold text-[#29452f]">
-                        {{ $order->total === null && $product ? Rupiah::forProduct($product) : Rupiah::format((int) $order->total) }}
+                        @if ($order->total === null && $order->isPunia())
+                            <span class="font-normal text-[#1f1b16]">Tanpa harga baku, sesuai kemampuan Anda</span>
+                        @else
+                            {{ $order->total === null && $product ? Rupiah::forProduct($product) : Rupiah::format((int) $order->total) }}
+                        @endif
                         @if ($order->total !== null && ! $order->isQuote() && ! empty($product['unit']) && empty($product['max_quantity']))
                             <span class="font-normal text-[#8b8175]">{{ $product['unit'] }}</span>
                         @endif

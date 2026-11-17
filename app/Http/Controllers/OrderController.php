@@ -55,7 +55,11 @@ class OrderController extends Controller
             'quantity' => $quantity,
             'unit_price' => $price,
             'total' => $price ? $price * $quantity : null,
-            'status' => $item['pricing'] === 'quote' ? Order::STATUS_AWAITING_QUOTE : Order::STATUS_AWAITING_PAYMENT,
+            'status' => match ($item['pricing']) {
+                'quote' => Order::STATUS_AWAITING_QUOTE,
+                'punia' => Order::STATUS_AWAITING_CONSULTATION,
+                default => Order::STATUS_AWAITING_PAYMENT,
+            },
             'customer_name' => $validated['name'],
             'customer_whatsapp' => $validated['whatsapp'],
             'customer_email' => $validated['email'],
@@ -149,6 +153,14 @@ class OrderController extends Controller
                 'quantity' => ['required', 'integer', 'between:1,'.($product['max_quantity'] ?? 10)],
                 'invitation_ref' => ['required', 'string', 'max:255'],
                 'notes' => ['required', 'string', 'max:1500'],
+            ],
+            'website' => [
+                'business_name' => ['required', 'string', 'max:100'],
+                'business_type' => ['required', 'string', 'max:100'],
+                'project_type' => ['required', 'in:Website,Aplikasi,Website dan aplikasi,Belum yakin'],
+                'needs' => ['required', 'string', 'max:2000'],
+                'domain_status' => ['nullable', 'in:Sudah punya domain,Belum punya domain,Belum tahu'],
+                'reference' => ['nullable', 'string', 'max:255'],
             ],
         };
     }

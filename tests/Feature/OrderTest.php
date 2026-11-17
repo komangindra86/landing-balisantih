@@ -291,6 +291,57 @@ class OrderTest extends TestCase
         $this->get($order->statusUrl())->assertSee('Bayar Sekarang Rp75.000');
     }
 
+    public function test_website_page_explains_punia_and_links_to_consultation(): void
+    {
+        $this->get('/website-dan-aplikasi')
+            ->assertOk()
+            ->assertSee('Punia, bukan daftar harga')
+            ->assertSee('Aplikasi kasir (POS)')
+            ->assertSee('Aplikasi toko bangunan')
+            ->assertSee('Aplikasi driver dan transport')
+            ->assertSee(route('orders.create', 'website-aplikasi'));
+
+        $this->get('/')->assertSee(route('website'))->assertSee('konsep punia');
+        $this->get('/syarat-ketentuan')->assertSee('konsep punia');
+        $this->get('/pesan/website-aplikasi')->assertOk()->assertSee('Ceritakan usaha Anda')->assertSee('Ajukan Konsultasi');
+    }
+
+    public function test_website_consultation_has_no_price_until_admin_bills_the_punia(): void
+    {
+        $this->fakeIpaymu();
+
+        $this->post('/pesan/website-aplikasi', $this->customer([
+            'business_name' => 'Warung Men Sari',
+            'business_type' => 'Warung makan',
+            'project_type' => 'Aplikasi',
+            'needs' => 'Profil, menu, lokasi, dan tombol WhatsApp.',
+            'domain_status' => 'Belum punya domain',
+        ]));
+
+        $order = Order::sole();
+        $this->assertNull($order->total);
+        $this->assertSame(Order::STATUS_AWAITING_CONSULTATION, $order->status);
+        $this->assertSame('Warung Men Sari', $order->details['business_name']);
+        Http::assertNothingSent();
+
+        $this->get($order->statusUrl())
+            ->assertSee('Kami segera menghubungi Anda')
+            ->assertSee('Tanpa harga baku')
+            ->assertDontSee('Berikan Punia');
+
+        $this->artisan('pesanan:tagih', ['code' => $order->code])->assertFailed();
+        $this->artisan('pesanan:tagih', ['code' => $order->code, 'amount' => '12.5'])->assertFailed();
+
+        $this->artisan('pesanan:tagih', ['code' => $order->code, 'amount' => 1500000])
+            ->expectsOutputToContain($order->statusUrl())
+            ->assertSuccessful();
+
+        $order->refresh();
+        $this->assertSame(1500000, $order->total);
+        $this->assertSame(self::PAYMENT_URL, $order->payment_url);
+        $this->get($order->statusUrl())->assertSee('Berikan Punia Rp1.500.000');
+    }
+
     public function test_order_is_kept_when_ipaymu_is_unavailable(): void
     {
         Http::fake(['sandbox.ipaymu.com/*' => Http::response(['Status' => 401, 'Message' => 'unauthorized'], 401)]);

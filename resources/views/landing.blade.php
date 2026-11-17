@@ -124,7 +124,7 @@
             ],
             [
                 'question' => 'Apakah aplikasi Bali Santih berbayar?',
-                'answer' => 'Akses semua aplikasi gratis, tanpa biaya lisensi. Yang berbayar hanya layanan pendukung: Banjar Digital server dan domain tahunan '.$price('banjar-digital-tahunan').' per tahun, Template Custom Standar '.$price('template-custom-standar').', Template Custom Animasi '.$price('template-custom-animasi').', dan revisi template custom '.$price('revisi-template').' per revisi.',
+                'answer' => 'Akses semua aplikasi gratis, tanpa biaya lisensi. Yang berbayar hanya layanan pendukung: Banjar Digital server dan domain tahunan '.$price('banjar-digital-tahunan').' per tahun, Template Custom Standar '.$price('template-custom-standar').', Template Custom Animasi '.$price('template-custom-animasi').', revisi template custom '.$price('revisi-template').' per revisi, serta pembuatan website dan aplikasi custom untuk usaha dengan konsep punia tanpa harga baku.',
                 'link' => ['label' => 'Lihat Layanan & Harga', 'url' => '#layanan'],
             ],
             [
@@ -151,6 +151,11 @@
                 'question' => 'Bisakah pesanan dibatalkan dan dana dikembalikan?',
                 'answer' => 'Pesanan dapat dibatalkan tanpa biaya selama belum dibayar. Pembayaran yang sudah diterima dapat dikembalikan bila pesanan dibatalkan sebelum pengerjaan dimulai. Setelah desain dikerjakan atau server dan domain diaktifkan, pembayaran tidak dapat dikembalikan kecuali layanan tidak dapat kami berikan.',
                 'link' => ['label' => 'Baca kebijakan Refund & Pembatalan', 'url' => route('refund')],
+            ],
+            [
+                'question' => 'Apakah Bali Santih menerima pembuatan website atau aplikasi untuk usaha?',
+                'answer' => 'Ya. Kami menerima pembuatan website dan aplikasi custom untuk usaha, misalnya website profil, aplikasi kasir (POS), aplikasi toko bangunan, atau aplikasi driver. Konsepnya punia: tidak ada harga baku, Anda memberikan punia sesuai kemampuan setelah website atau aplikasi siap. Konsultasi tidak dipungut biaya.',
+                'link' => ['label' => 'Lihat contoh dan konsep punia', 'url' => route('website')],
             ],
             [
                 'question' => 'Bagaimana dana iuran banjar dan wedding gift diproses?',
@@ -410,6 +415,32 @@
                         </div>
                     @endforeach
                 </div>
+
+                <article class="reveal mt-12 grid gap-8 overflow-hidden rounded-[8px] bg-[#17130f] p-6 text-white sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                    <div>
+                        <p class="text-xs font-semibold uppercase text-[#f5d681]">Website & Aplikasi untuk Usaha</p>
+                        <h3 class="mt-3 text-2xl font-semibold leading-tight sm:text-3xl">Punya usaha? Kami bantu buatkan website atau aplikasinya, dengan konsep punia</h3>
+                        <p class="mt-4 leading-7 text-white/70">
+                            Bali Santih juga menerima pembuatan website dan aplikasi custom untuk usaha. Tidak ada harga baku: kami mengerjakannya sebagai bentuk ngayah, dan Anda memberikan punia sesuai kemampuan.
+                        </p>
+                        <ul class="mt-5 flex flex-wrap gap-2 text-xs font-medium text-white/80">
+                            @foreach (['Website profil usaha', 'Aplikasi kasir (POS)', 'Aplikasi toko bangunan', 'Aplikasi driver & transport'] as $example)
+                                <li class="rounded-full border border-white/15 bg-white/5 px-3 py-1.5">{{ $example }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
+                        <a href="{{ route('website') }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#d7b46a] px-6 py-3.5 text-sm font-semibold text-[#17130f] transition hover:-translate-y-0.5 hover:bg-[#efcf82]">
+                            Lihat Contoh & Konsep Punia
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="{{ route('orders.create', 'website-aplikasi') }}" class="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/15">
+                            Ajukan Konsultasi
+                        </a>
+                    </div>
+                </article>
             </div>
         </section>
 
@@ -667,6 +698,7 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-x-5 gap-y-3 text-sm text-white/55 sm:justify-end">
+                    <a class="hover:text-[#f5d681]" href="{{ route('website') }}">Website & Aplikasi</a>
                     <a class="hover:text-[#f5d681]" href="#faq">FAQ</a>
                     <a class="hover:text-[#f5d681]" href="{{ route('terms') }}">Syarat & Ketentuan</a>
                     <a class="hover:text-[#f5d681]" href="{{ route('privacy') }}">Kebijakan Privasi</a>

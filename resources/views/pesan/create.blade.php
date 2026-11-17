@@ -4,17 +4,23 @@
     use App\Support\Rupiah;
 
     $isQuote = $product['pricing'] === 'quote';
+    $isPunia = $product['pricing'] === 'punia';
     $quantity = max(1, (int) old('quantity', 1));
+    $action = match (true) {
+        $isPunia => 'Ajukan konsultasi',
+        $isQuote => 'Ajukan pesanan',
+        default => 'Pesan',
+    };
 @endphp
 
-@section('title', ($isQuote ? 'Ajukan Pesanan ' : 'Pesan ').$product['name'])
+@section('title', $action.' '.$product['name'])
 @section('description', $product['summary'])
 
 @section('content')
     <main class="mx-auto max-w-6xl px-5 py-12 sm:py-16">
         <p class="text-sm font-semibold uppercase text-[#8a6a2e]">{{ $product['application'] }}</p>
         <h1 class="mt-3 text-3xl font-semibold leading-tight sm:text-4xl">
-            {{ $isQuote ? 'Ajukan pesanan' : 'Pesan' }} {{ $product['name'] }}
+            {{ $isPunia ? 'Ceritakan usaha Anda' : $action.' '.$product['name'] }}
         </h1>
         <p class="mt-4 max-w-2xl text-lg leading-8 text-[#5f574d]">{{ $product['summary'] }}</p>
 
@@ -63,6 +69,16 @@
                                 <x-field name="reference" label="Referensi desain" class="sm:col-span-2" placeholder="Tautan contoh desain, Pinterest, atau Instagram" />
                                 <x-field name="notes" label="Cerita dan kebutuhan lainnya" type="textarea" class="sm:col-span-2" placeholder="Konten yang ingin ditampilkan, elemen budaya, musik, atau hal lain yang perlu kami ketahui." />
                             </div>
+                        @elseif ($product['form'] === 'website')
+                            <legend class="text-lg font-semibold">Tentang usaha Anda</legend>
+                            <div class="mt-5 grid gap-5 sm:grid-cols-2">
+                                <x-field name="business_name" label="Nama usaha" required placeholder="Warung Men Sari" />
+                                <x-field name="business_type" label="Jenis usaha" required placeholder="Toko bangunan, warung, homestay, driver, ..." />
+                                <x-field name="project_type" label="Yang Anda butuhkan" type="select" required class="sm:col-span-2" :options="['Website', 'Aplikasi', 'Website dan aplikasi', 'Belum yakin']" hint="Website agar usaha dikenal dan dihubungi pelanggan; aplikasi untuk membantu pekerjaan sehari-hari seperti kasir atau stok." />
+                                <x-field name="needs" label="Ceritakan kebutuhan Anda" type="textarea" rows="5" required class="sm:col-span-2" placeholder="Misalnya: aplikasi kasir untuk mencatat penjualan dan stok, atau website profil dengan menu, lokasi, dan tombol WhatsApp." />
+                                <x-field name="domain_status" label="Domain (untuk website)" type="select" :options="['Sudah punya domain', 'Belum punya domain', 'Belum tahu']" />
+                                <x-field name="reference" label="Contoh yang Anda suka" placeholder="Tautan website, aplikasi, atau Instagram usaha" />
+                            </div>
                         @else
                             <legend class="text-lg font-semibold">Detail revisi</legend>
                             <div class="mt-5 grid gap-5 sm:grid-cols-[160px_1fr]">
@@ -87,7 +103,7 @@
                     @enderror
 
                     <button type="submit" class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#29452f] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#1f3524] sm:w-auto">
-                        {{ $isQuote ? 'Ajukan Pesanan' : 'Lanjut ke Pembayaran' }}
+                        {{ match (true) { $isPunia => 'Ajukan Konsultasi', $isQuote => 'Ajukan Pesanan', default => 'Lanjut ke Pembayaran' } }}
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                             <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -98,11 +114,16 @@
             <aside class="lg:sticky lg:top-6">
                 <div class="overflow-hidden rounded-[8px] border border-[#e4dac7] bg-white">
                     <div class="bg-[#29452f] p-6 text-white">
-                        <p class="text-xs font-semibold uppercase text-[#f5d681]">Ringkasan pesanan</p>
+                        <p class="text-xs font-semibold uppercase text-[#f5d681]">{{ $isPunia ? 'Konsultasi' : 'Ringkasan pesanan' }}</p>
                         <h2 class="mt-2 text-xl font-semibold">{{ $product['name'] }}</h2>
                     </div>
                     <div class="p-6 text-sm">
-                        @if ($isQuote)
+                        @if ($isPunia)
+                            <p class="text-[#6f6558]">Harga</p>
+                            <p class="mt-1 text-2xl font-semibold text-[#1f1b16]">Punia</p>
+                            <p class="mt-4 leading-6 text-[#5f574d]">Tidak ada harga baku. Anda memberikan punia sesuai kemampuan dan manfaat yang Anda rasakan. Konsultasi tidak dipungut biaya.</p>
+                            <a href="{{ route('website') }}#punia" class="mt-3 inline-flex font-semibold text-[#29452f] underline underline-offset-4">Tentang konsep punia</a>
+                        @elseif ($isQuote)
                             <p class="text-[#6f6558]">Kisaran harga</p>
                             <p class="mt-1 text-2xl font-semibold text-[#1f1b16]">{{ Rupiah::forProduct($product) }}</p>
                             <p class="mt-4 leading-6 text-[#5f574d]">Harga final menyesuaikan tingkat kerumitan desain. Anda belum perlu membayar sekarang.</p>
@@ -137,7 +158,11 @@
                     <div class="border-t border-[#eee5d6] bg-[#faf8f3] p-6">
                         <h3 class="text-sm font-semibold text-[#1f1b16]">Langkah berikutnya</h3>
                         <ol class="mt-3 space-y-2.5 text-sm leading-6 text-[#5f574d]">
-                            @if ($isQuote)
+                            @if ($isPunia)
+                                <li><span class="font-semibold text-[#8a6a2e]">1.</span> Kami menghubungi Anda untuk berdiskusi tentang usaha dan kebutuhan Anda.</li>
+                                <li><span class="font-semibold text-[#8a6a2e]">2.</span> Ruang lingkup pekerjaan disepakati bersama sebelum mulai.</li>
+                                <li><span class="font-semibold text-[#8a6a2e]">3.</span> Website atau aplikasi dikerjakan, lalu punia diberikan melalui tagihan resmi Bali Santih.</li>
+                            @elseif ($isQuote)
                                 <li><span class="font-semibold text-[#8a6a2e]">1.</span> Kami mempelajari brief Anda dan menghubungi untuk konsultasi.</li>
                                 <li><span class="font-semibold text-[#8a6a2e]">2.</span> Anda menerima penawaran harga final.</li>
                                 <li><span class="font-semibold text-[#8a6a2e]">3.</span> Setelah disetujui dan dibayar, desain mulai dikerjakan.</li>
