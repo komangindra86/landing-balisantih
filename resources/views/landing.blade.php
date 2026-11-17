@@ -96,6 +96,19 @@
 
         $weddingPaymentDemoUrl = 'https://undangan.balisantih.com/demo/wedding-gift-xendit';
 
+        $customOfferings = [
+            [
+                'label' => 'Website',
+                'title' => 'Agar usaha mudah ditemukan dan dihubungi',
+                'items' => ['Profil usaha', 'Katalog, menu, atau daftar kamar', 'Pemesanan lewat WhatsApp', 'Website komunitas dan lembaga'],
+            ],
+            [
+                'label' => 'Aplikasi',
+                'title' => 'Agar pekerjaan sehari-hari lebih rapi',
+                'items' => ['Aplikasi kasir (POS)', 'Aplikasi toko bangunan', 'Aplikasi driver dan transport', 'Aplikasi operasional lainnya'],
+            ],
+        ];
+
         $demoBanjarAccounts = [
             'Admin Banjar' => 'admindemobanjar@balisantih.com',
             'Kelian Adat' => 'keliandemobanjar@balisantih.com',
@@ -183,12 +196,13 @@
                 </span>
                 <span>
                     <span class="block text-base font-semibold leading-none">Bali Santih</span>
-                    <span class="mt-1 block text-[11px] text-white/55">Ekosistem Digital Bali</span>
+                    <span class="mt-1 block whitespace-nowrap text-[11px] text-white/55">Ekosistem Digital Bali</span>
                 </span>
             </a>
 
-            <div class="hidden items-center gap-7 text-sm font-medium text-white/75 lg:flex">
+            <div class="hidden items-center gap-5 whitespace-nowrap text-sm font-medium text-white/75 lg:flex xl:gap-7">
                 <a class="transition hover:text-[#f5d681]" href="#aplikasi">Aplikasi</a>
+                <a class="transition hover:text-[#f5d681]" href="#website-aplikasi">Website & Aplikasi</a>
                 <a class="transition hover:text-[#f5d681]" href="#layanan">Layanan</a>
                 <a class="transition hover:text-[#f5d681]" href="#tentang">Tentang</a>
                 <a class="transition hover:text-[#f5d681]" href="#ngayah">Konsep Ngayah</a>
@@ -198,7 +212,7 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="#aplikasi" class="hidden items-center gap-2 rounded-full bg-[#d7b46a] px-5 py-2.5 text-sm font-semibold text-[#17130f] transition hover:bg-[#efcf82] sm:inline-flex">
+                <a href="#aplikasi" class="hidden items-center gap-2 rounded-full bg-[#d7b46a] px-5 py-2.5 text-sm font-semibold text-[#17130f] transition hover:bg-[#efcf82] sm:inline-flex lg:hidden xl:inline-flex">
                     Jelajahi Aplikasi
                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                         <path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -215,6 +229,7 @@
         <div class="hidden border-t border-white/10 bg-[#17130f]/98 px-5 pb-5 pt-2 text-sm text-white/80 lg:hidden" data-mobile-menu>
             <div class="mx-auto flex max-w-7xl flex-col gap-1">
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#aplikasi">Aplikasi</a>
+                <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#website-aplikasi">Website & Aplikasi</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#layanan">Layanan</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#tentang">Tentang</a>
                 <a class="rounded-[8px] px-3 py-3 hover:bg-white/10" href="#ngayah">Konsep Ngayah</a>
@@ -321,6 +336,54 @@
             </div>
         </section>
 
+        <section id="website-aplikasi" class="scroll-mt-20 bg-[#17130f] py-20 text-white sm:py-24">
+            <div class="mx-auto max-w-7xl px-5 lg:px-8">
+                <div class="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+                    <div class="reveal">
+                        <p class="text-sm font-semibold uppercase text-[#f5d681]">Website & Aplikasi untuk Usaha</p>
+                        <h2 class="mt-4 text-3xl font-semibold leading-tight sm:text-4xl">Punya usaha? Kami bantu buatkan website atau aplikasinya</h2>
+                    </div>
+                    <p class="reveal max-w-2xl text-lg leading-8 text-white/70 lg:justify-self-end">
+                        Selain empat aplikasi di atas, Bali Santih menerima pembuatan website dan aplikasi custom untuk usaha. Tidak ada harga baku: kami mengerjakannya sebagai bentuk ngayah, dan Anda memberikan <span class="font-semibold text-[#f5d681]">punia</span> sesuai kemampuan setelah pekerjaan selesai.
+                    </p>
+                </div>
+
+                <div class="mt-12 grid gap-6 md:grid-cols-2">
+                    @foreach ($customOfferings as $offering)
+                        <article class="reveal rounded-[8px] border border-white/10 bg-white/[0.04] p-6 sm:p-7">
+                            <p class="text-xs font-semibold uppercase text-[#f5d681]">{{ $offering['label'] }}</p>
+                            <h3 class="mt-2 text-xl font-semibold">{{ $offering['title'] }}</h3>
+                            <ul class="mt-5 grid gap-3 text-sm text-white/80 sm:grid-cols-2">
+                                @foreach ($offering['items'] as $item)
+                                    <li class="flex items-center gap-2.5">
+                                        <svg class="h-4 w-4 shrink-0 text-[#d7b46a]" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                            <path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <span>{{ $item }}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </article>
+                    @endforeach
+                </div>
+
+                <div class="reveal mt-10 flex flex-col gap-6 border-t border-white/10 pt-8 lg:flex-row lg:items-center lg:justify-between">
+                    <p class="max-w-2xl text-sm leading-7 text-white/60">Konsultasi tidak dipungut biaya. Ruang lingkup pekerjaan disepakati bersama sebelum mulai, dan biaya pihak ketiga seperti domain atau server disampaikan secara terbuka.</p>
+                    <div class="flex shrink-0 flex-col gap-3 whitespace-nowrap sm:flex-row">
+                        <a href="{{ route('website') }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#d7b46a] px-6 py-3.5 text-sm font-semibold text-[#17130f] transition hover:-translate-y-0.5 hover:bg-[#efcf82]">
+                            Lihat Contoh & Konsep Punia
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="{{ route('orders.create', 'website-aplikasi') }}" class="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/15">
+                            Ajukan Konsultasi
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="layanan" class="scroll-mt-20 border-t border-[#ece3d2] bg-[#fbfaf6] py-20 sm:py-24">
             <div class="mx-auto max-w-7xl px-5 lg:px-8">
                 <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
@@ -415,32 +478,6 @@
                         </div>
                     @endforeach
                 </div>
-
-                <article class="reveal mt-12 grid gap-8 overflow-hidden rounded-[8px] bg-[#17130f] p-6 text-white sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-                    <div>
-                        <p class="text-xs font-semibold uppercase text-[#f5d681]">Website & Aplikasi untuk Usaha</p>
-                        <h3 class="mt-3 text-2xl font-semibold leading-tight sm:text-3xl">Punya usaha? Kami bantu buatkan website atau aplikasinya, dengan konsep punia</h3>
-                        <p class="mt-4 leading-7 text-white/70">
-                            Bali Santih juga menerima pembuatan website dan aplikasi custom untuk usaha. Tidak ada harga baku: kami mengerjakannya sebagai bentuk ngayah, dan Anda memberikan punia sesuai kemampuan.
-                        </p>
-                        <ul class="mt-5 flex flex-wrap gap-2 text-xs font-medium text-white/80">
-                            @foreach (['Website profil usaha', 'Aplikasi kasir (POS)', 'Aplikasi toko bangunan', 'Aplikasi driver & transport'] as $example)
-                                <li class="rounded-full border border-white/15 bg-white/5 px-3 py-1.5">{{ $example }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-stretch">
-                        <a href="{{ route('website') }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-[#d7b46a] px-6 py-3.5 text-sm font-semibold text-[#17130f] transition hover:-translate-y-0.5 hover:bg-[#efcf82]">
-                            Lihat Contoh & Konsep Punia
-                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                                <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <a href="{{ route('orders.create', 'website-aplikasi') }}" class="inline-flex items-center justify-center rounded-full border border-white/25 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/15">
-                            Ajukan Konsultasi
-                        </a>
-                    </div>
-                </article>
             </div>
         </section>
 
